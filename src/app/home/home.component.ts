@@ -20,10 +20,7 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('inside home',this.route.snapshot.queryParams['currentUser'])
         this.currentUser = this.route.snapshot.queryParams['currentUser'] ? this.route.snapshot.queryParams['currentUser'] : this.authenticationService.currentUserValue
-        console.log('currentUser',this.currentUser)
-        // this.loadAllUsers();
     }
 
     deleteUser(id: number) {
