@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="email" placeholder="Email" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <input type="text" formControlName="email" placeholder="Email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
                 <div *ngIf="f.email.errors.pattern">Email pattern is invalid</div>

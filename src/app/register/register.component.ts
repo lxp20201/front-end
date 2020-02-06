@@ -28,8 +28,8 @@ export class RegisterComponent implements OnInit {
         this.registerForm = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
-            email: ['', Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
-            mobile: ['', Validators.required,Validators.minLength(10),Validators.maxLength(10)],
+            email: ['', Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
+            mobile: ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
             organization: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
         // reset alerts on submit
         this.alertService.clear();
 
@@ -50,14 +49,14 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-
+        console.log(this.registerForm)
         this.loading = true;
         this.userService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login'], { queryParams: { registered: true }});
+                    this.router.navigate(['/login'], { queryParams: { registered: true } });
                 },
                 error => {
                     this.alertService.error(error);

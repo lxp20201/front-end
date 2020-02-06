@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { UserService, AuthenticationService } from '../_services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
@@ -12,13 +13,14 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private authenticationService: AuthenticationService,
-        private userService: UserService
+        private userService: UserService,  private route: ActivatedRoute,
     ) {
-        this.currentUser = this.authenticationService.currentUserValue;
+        // this.currentUser = this.authenticationService.currentUserValue;
         // this.activeUser = this.authenticationService.currentUserValue ? true : false;
     }
 
     ngOnInit() {
+        this.currentUser = this.route.snapshot.queryParams['currentUser'] ? this.route.snapshot.queryParams['currentUser'] : this.authenticationService.currentUserValue
         // this.loadAllUsers();
     }
 
