@@ -4,24 +4,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService, AlertService } from '../_services'
-import { BehaviorSubject } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
-    private messageSource = new BehaviorSubject('login');
-    currentMessage = this.messageSource.asObservable();
     loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
-
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        public app : AppComponent
     ) {
+
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
             this.router.navigate(['/']);
