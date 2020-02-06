@@ -9,19 +9,19 @@
         <div class="form-group">
             <input type="text" formControlName="firstName" placeholder="First Name" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors" class="invalid-feedback">
                 <div *ngIf="f.firstName.errors.required">First Name is required</div>
             </div>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="lastName" placeholder="Last Name"  class="form-control"
+            <input type="text" formControlName="lastName" placeholder="Last Name" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors" class="invalid-feedback">
                 <div *ngIf="f.lastName.errors.required">Last Name is required</div>
             </div>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="mobile" placeholder="Mobile" class="form-control"
+            <input type="text" formControlName="mobile" placeholder="Mobile 1" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
             <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                 <div *ngIf="f.mobile.errors.required">Mobile is required</div>
@@ -29,7 +29,15 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="email" placeholder="Email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            <input type="text" formControlName="mobile2" placeholder="Mobile 2" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
+            <div *ngIf="submitted && f.mobile2.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile2.errors.required">Mobile is required</div>
+                <div *ngIf="f.mobile2.errors.minlength || f.mobile2.errors.maxlength">Mobile must be 10 digits</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" formControlName="email" placeholder="Email" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
@@ -44,7 +52,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="password" formControlName="password" placeholder ="Password" class="form-control"
+            <input type="password" formControlName="password" placeholder="Password" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
@@ -52,14 +60,15 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="password" formControlName="confirmpassword" placeholder ="Confirm Password" class="form-control"
+            <input type="password" formControlName="confirmpassword" placeholder="Confirm Password" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.confirmpassword.errors }" />
             <div *ngIf="submitted && f.confirmpassword.errors" class="invalid-feedback">
                 <div *ngIf="f.confirmpassword.errors.required">Confirm Password is required</div>
                 <div *ngIf="f.confirmpassword.errors.minlength">Confirm Password must be at least 6 characters</div>
+                <!-- {{f.password | json}} -->
+                <div *ngIf="f.password != null && f.password != f.confirmpassword">Confirm Password must be same as password</div>
             </div>
         </div>
-
         <button [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign Up

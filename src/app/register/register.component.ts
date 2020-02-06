@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
             lastName: ['', Validators.required],
             email: ['', Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
             mobile: ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
+            mobile2: ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
             organization: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
-
         });
     }
 
@@ -44,11 +44,14 @@ export class RegisterComponent implements OnInit {
         this.submitted = true;
         // reset alerts on submit
         this.alertService.clear();
-
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
+        } else if (this.registerForm.value.password != this.registerForm.value.confirmpassword) {
+            this.alertService.error('Passwords doesnt match');
+            return;
         }
+           
         console.log(this.registerForm)
         this.loading = true;
         this.userService.register(this.registerForm.value)
