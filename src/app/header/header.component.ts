@@ -12,10 +12,11 @@ export class HeaderComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private router: Router, ) { }
 
   ngOnInit() {
-    console.log(this.userActive, this.showHeader)
+    // console.log(this.userActive, this.showHeader)
   }
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/'], { queryParams: { currentUser: null }});
+    console.log('inside logout')
+    this.router.navigate(['/login'], { queryParams: { currentUser: null }});
   }
 }

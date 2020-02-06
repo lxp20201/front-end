@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService, AlertService } from '../_services'
 import { AppComponent } from '../app.component';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    loading = false;
     submitted = false;
+    loading = false;
     returnUrl: string;
     constructor(
         private formBuilder: FormBuilder,
@@ -18,21 +18,19 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
-        public app : AppComponent
+        public app: AppComponent
     ) {
-
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
     }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            username: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+            password: new FormControl('', [Validators.required, Validators.minLength(6)])
         });
-
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -42,15 +40,13 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
         // reset alerts on submit
         this.alertService.clear();
-        
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            this.alertService.error('Please fill required details correctly');
             return;
         }
-
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
@@ -60,7 +56,6 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     this.alertService.error(error);
-                    this.loading = false;
                 });
     }
 }

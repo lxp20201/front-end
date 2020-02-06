@@ -21,6 +21,7 @@ export class AppComponent {
 
     ngOnInit() {
         this.router.events.subscribe((e: any) => {
+            console.log(e)
             if ((e && (e.url === '/register' || e.snapshot && e.snapshot._routerState.url === '/register' ||
                 e.routerEvent && e.routerEvent.url === '/register')))
                 this.showHeader = false;

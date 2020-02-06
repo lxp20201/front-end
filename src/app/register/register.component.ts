@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import { MustMatch } from '../_helpers/must-match.validator';
 import { UserService, AuthenticationService, AlertService } from '../_services';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
-    loading = false;
     submitted = false;
-
+    loading = false;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -26,18 +25,19 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],
-            mobile: ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
-            mobile2: ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
-            organization: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            confirmpassword: ['', [Validators.required, Validators.minLength(6)]],
+            firstName: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(100)]),
+            lastName:  new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(1), Validators.maxLength(100)]),
+            email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+            mobile:new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10),Validators.pattern(/^[6-9]\d{9}\1*$/)]),
+            organization:new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
+            password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern(/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
+            confirmpassword:new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern(/^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
+        },{
+            validator: MustMatch('password', 'confirmpassword')
         });
     }
 
-    // convenience getter for easy access to form fields
+    // convenience getter for easy access to form fields///---/^[6-9]\d{9}\1*$/-------\\1{5}
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
@@ -46,14 +46,13 @@ export class RegisterComponent implements OnInit {
         this.alertService.clear();
         // stop here if form is invalid
         if (this.registerForm.invalid) {
+            this.alertService.error('Please fill required details correctly');
             return;
         } else if (this.registerForm.value.password != this.registerForm.value.confirmpassword) {
             this.alertService.error('Passwords doesnt match');
             return;
         }
-           
-        console.log(this.registerForm)
-        this.loading = true;
+           this.loading = true
         this.userService.register(this.registerForm.value)
             .pipe(first())
             .subscribe(
@@ -63,7 +62,6 @@ export class RegisterComponent implements OnInit {
                 },
                 error => {
                     this.alertService.error(error);
-                    this.loading = false;
                 });
     }
 }
