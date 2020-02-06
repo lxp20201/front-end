@@ -9,7 +9,7 @@
         <div class="form-group">
             <!-- <label for="username">Username</label> -->
             <input type="text" name="username" formControlName="username" placeholder="Email *" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required />
+                [ngClass]="{ 'is-invalid': submitted && (f.username.errors) }" required />
             <div *ngIf="f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Email is required</div>
                 <div *ngIf="f.username.errors.pattern">Email pattern is invalid</div>
