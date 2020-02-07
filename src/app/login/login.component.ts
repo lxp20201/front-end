@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+            email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
         });
         // get return url from route parameters or default to '/'
@@ -48,14 +48,24 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        var payload = new FormData();
+        payload.append("email", this.loginForm.value.email);
+        payload.append('password', this.loginForm.value.password);
+        console.log(payload,'payloadpayload')
+        this.authenticationService.login(payload)
             .pipe(first())
             .subscribe(
                 data => {
+                    console.log(data)
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    console.log(error)
+                    if(error == 'Forbidden'){
+                        this.loading = false;
+                        this.alertService.success('In order to sign in, you need to activate your account.');
+                    }
+                    // this.alertService.error(error);
                 });
     }
 }

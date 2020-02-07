@@ -14,13 +14,16 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AlertComponent } from './_components';
 import { HeaderComponent } from './header/header.component';
-
+// import { ApolloModule } from 'apollo-angular';
+// import { HttpLinkModule } from 'apollo-angular-link-http';
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        appRoutingModule
+        appRoutingModule,
+        // ApolloModule,
+        // HttpLinkModule,
     ],
     declarations: [
         AppComponent,

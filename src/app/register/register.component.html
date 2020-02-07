@@ -8,24 +8,24 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (keydown.Tab) = "onSubmit()" (click)="onSubmit()">
         <div class="form-group">
            
-            <input type="text" formControlName="firstName" name = "firstName" placeholder="First Name *" class="form-control"
-                [ngClass]="{ 'is-invalid': f.firstName.touched && f.firstName.errors }" />
-            <div *ngIf="f.firstName.touched && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                <div *ngIf="f.firstName.errors.pattern">First Name is invalid</div>
-                <div *ngIf="f.firstName.errors.minlength">First Name must be 3 characters long </div>
-                <div *ngIf="f.firstName.errors.maxlength">First Name must be 100 maximum of characters</div>
+            <input type="text" formControlName="name" name = "firstName" placeholder="First Name *" class="form-control"
+                [ngClass]="{ 'is-invalid': f.name.touched && f.name.errors }" />
+            <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">First Name is required</div>
+                <div *ngIf="f.name.errors.pattern">First Name is invalid</div>
+                <div *ngIf="f.name.errors.minlength">First Name must be 3 characters long </div>
+                <div *ngIf="f.name.errors.maxlength">First Name must be 100 maximum of characters</div>
                 <!-- {{f.firstName.errors | json}} -->
             </div>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="lastName" placeholder="Last Name *" class="form-control"
-                [ngClass]="{ 'is-invalid': f.lastName.touched && f.lastName.errors }" />
-            <div *ngIf="f.lastName.touched && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                <div *ngIf="f.lastName.errors.pattern">Last Name is invalid</div>
-                <div *ngIf="f.lastName.errors.minlength">Last Name must be 3 characters long </div>
-                <div *ngIf="f.lastName.errors.maxlength">Last Name must be 100 maximum of characters</div>
+            <input type="text" formControlName="username" placeholder="Last Name *" class="form-control"
+                [ngClass]="{ 'is-invalid': f.username.touched && f.username.errors }" />
+            <div *ngIf="f.username.touched && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Last Name is required</div>
+                <div *ngIf="f.username.errors.pattern">Last Name is invalid</div>
+                <div *ngIf="f.username.errors.minlength">Last Name must be 3 characters long </div>
+                <div *ngIf="f.username.errors.maxlength">Last Name must be 100 maximum of characters</div>
             </div>
         </div>
         <div class="form-group">

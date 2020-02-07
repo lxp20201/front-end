@@ -12,8 +12,12 @@ export class UserService {
     }
 
     register(user) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post(`http://192.168.0.74:8080/user_api/v1/account/registration/`, user);
     }
+    verifyemail(data){
+        return this.http.post(`http://192.168.0.74:3001/verifyemail`, data);
+    }
+    
 
     delete(id) {
         return this.http.delete(`${environment.apiUrl}/users/${id}`);
