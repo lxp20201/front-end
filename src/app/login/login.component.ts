@@ -48,9 +48,12 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.loading = true;
-        var payload = new FormData();
+        var d;
+        d = false;
+        let payload = new FormData();
         payload.append("email", this.loginForm.value.email);
         payload.append('password', this.loginForm.value.password);
+        payload.append('remember', d);
         console.log(payload,'payloadpayload')
         this.authenticationService.login(payload)
             .pipe(first())
