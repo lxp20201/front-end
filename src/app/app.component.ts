@@ -13,14 +13,18 @@ export class AppComponent {
         private router: Router, private location: Location,
         private authenticationService: AuthenticationService,
     ) {
-        this.authenticationService.currentUser.subscribe((x) => {
-            this.currentUser = x;
-            this.activeUser = this.currentUser ? true : false;
-        });
+        // this.authenticationService.currentUser.subscribe((x) => {
+        //     this.currentUser = x;
+        //     this.activeUser = this.currentUser ? true : false;
+        //     console.log(this.activeUser)
+        // });
+        this.currentUser =  localStorage.getItem('currentUser') ;
+        this.activeUser = this.currentUser ? true : false;
     }
 
     ngOnInit() {
         this.router.events.subscribe((e: any) => {
+            // console.log(e)
             if ((e && (e.url === '/register' || e.snapshot && e.snapshot._routerState.url === '/register' ||
                 e.routerEvent && e.routerEvent.url === '/register')))
                 this.showHeader = false;

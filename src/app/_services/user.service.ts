@@ -12,10 +12,14 @@ export class UserService {
     }
 
     register(user) {
-        return this.http.post(`http://192.168.0.74:8080/user_api/v1/account/registration/`, user);
+        return this.http.post(`http://18.218.96.173:8082/user_api/v1/account/registration/`, user);
     }
     verifyemail(data){
-        return this.http.post(`http://192.168.0.74:3001/verifyemail`, data);
+        return this.http.post(`http://18.218.96.173/v2/verifyemail`, data);
+    }
+
+    checkProfile(email){
+        return this.http.get(`http://18.218.96.173/v2/getuserdetails?email=`+email);
     }
     
 

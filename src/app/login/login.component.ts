@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
         public app: AppComponent
     ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
+        // if (this.authenticationService.currentUserValue) {
+        //     this.router.navigate(['/']);
+        // }
     }
 
     ngOnInit() {
@@ -57,15 +57,16 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     console.log(data)
-                    this.router.navigate([this.returnUrl]);
+                    localStorage.setItem('currentUser', JSON.stringify(data));
+                    this.router.navigate(['/']);
                 },
                 error => {
                     console.log(error)
                     if(error == 'Forbidden'){
                         this.loading = false;
-                        this.alertService.success('In order to sign in, you need to activate your account.');
+                        this.alertService.error('In order to sign in, you need to activate your account.');
                     }
-                    // this.alertService.error(error);
+                    // this.alertServic e.error(error);
                 });
     }
 }
