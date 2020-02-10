@@ -5,7 +5,7 @@
     <img class="logoImg" src="assets/logo.png" a routerLink="/">
     <br>
     <h1>Sign Up</h1>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (keydown.Tab) = "onSubmit()" (click)="onSubmit()">
+    <form [formGroup]="registerForm" >
         <div class="form-group">
            
             <input type="text" formControlName="name" name = "firstName" placeholder="First Name *" class="form-control"
@@ -75,7 +75,7 @@
                 <div *ngIf="f.confirmpassword.errors.mustMatch"> Passwords must be same</div>
             </div>
         </div>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (click)="onSubmit()">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign Up
         </button>
