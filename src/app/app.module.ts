@@ -14,6 +14,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AlertComponent } from './_components';
 import { HeaderComponent } from './header/header.component';
+import { DummyComponent } from './dummy/dummy.component';
 // import { ApolloModule } from 'apollo-angular';
 // import { HttpLinkModule } from 'apollo-angular-link-http';
 @NgModule({
@@ -31,7 +32,8 @@ import { HeaderComponent } from './header/header.component';
         LoginComponent,
         RegisterComponent,
         AlertComponent,
-        HeaderComponent
+        HeaderComponent,
+        DummyComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -19,20 +19,25 @@ export class HomeComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             let email = params['email'];
             if (email) {
+                this.router.navigate(['/dummy'])
                 console.log(email); // Print the parameter to the console. 
                 this.userService.checkProfile(email)
                     .pipe(first())
                     .subscribe(
                         data => {
-                            console.log(data)
-                            localStorage.setItem('currentUser', JSON.stringify(data));
-                            this.router.navigate(['/home']);
+                            console.log(data);
+                            if (data['success']) {
+                                localStorage.setItem('currentUser', JSON.stringify(data));
+                                this.router.navigate(['/home']);
+                            } else {
+                                this.router.navigate(['/login']);
+                                this.alertService.error('Sorry! Authentication failed');
+                            }
                         },
                         error => {
                             console.log(error)
-                            this.router.navigate(['/']);
-                            this.alertService.error('Please try after somethime');
-                            // this.alertService.error(error);
+                            this.router.navigate(['/login']);
+                            this.alertService.error('Please try after sometime');
                         });
             }
 

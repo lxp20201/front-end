@@ -15,11 +15,7 @@ export class RegisterComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private alertService: AlertService
-    ) {
-        // redirect to home if already logged in
-        // if (this.authenticationService.currentUserValue) {
-        //     this.router.navigate(['/']);
-        // }
+    ) {     
     }
 
     ngOnInit() {
@@ -47,10 +43,8 @@ export class RegisterComponent implements OnInit {
         payload.append('password', this.registerForm.value.password);
         payload.append("organization", this.registerForm.value.organization);
         payload.append('mobile', this.registerForm.value.mobile);
-        // payload.append('lastName', this.registerForm.value.lastName);
         payload.append('honor_code', 'true');
         payload.append('terms_of_service', 'true');
-        console.log(payload, 'payloadpayload')
         this.loading = true
 
         let details = {
@@ -60,25 +54,32 @@ export class RegisterComponent implements OnInit {
         this.userService.register(payload).pipe(first()).subscribe(
             data => {
                 console.log(data)
-                this.alertService.success('Registration successful, a mail has been sent to your account. Please Verify to login', true);
-                this.router.navigate(['/'], { queryParams: { registered: true } });
-                this.userService.verifyemail(details).pipe(first()).subscribe(
-                    data1 => {
-                        console.log(data1, 'data1data1')
-                    }, error => {   
-                        // this.alertService.error(error);
-                    })
+                if (data['success']) {
+                    this.userService.verifyemail(details).pipe(first()).subscribe(
+                        data1 => {
+                            this.alertService.success(data1['message']);
+                            this.router.navigate(['/login']);
+                        }, error1 => {
+                            this.alertService.error('Please try again later');
+                        })
+                } else {
+                    debugger
+                    console.log(data, 'errr')
+                }
+                // this.router.navigate(['/'], { queryParams: { registered: true } });
+
             }, error => {
-                this.loading = false
-                if (error == 'Conflict')
-                    this.alertService.error('Mail ID already registered!');
-                else
-                    this.alertService.error('Please try again later');
+                this.loading = false;
+                debugger
+                console.log(error, 'error')
+                // if (error == 'Conflict')
+                //     this.alertService.error('Mail ID already registered!');
+                // else
+                //     this.alertService.error('Please try again later');
             });
     }
 
     onSubmit() {
-        console.log('inside', this.registerForm)
         // reset alerts on submit
         this.alertService.clear();
         // stop here if form is invalid

@@ -18,7 +18,7 @@ export class AppComponent {
         //     this.activeUser = this.currentUser ? true : false;
         //     console.log(this.activeUser)
         // });
-        this.currentUser =  localStorage.getItem('currentUser') ;
+        this.currentUser = localStorage.getItem('currentUser');
         this.activeUser = this.currentUser ? true : false;
     }
 
@@ -29,7 +29,10 @@ export class AppComponent {
                 e.routerEvent && e.routerEvent.url === '/register')))
                 this.showHeader = false;
             else if ((e && (e.url === '/login' || e.snapshot && e.snapshot._routerState.url === '/login' ||
-            e.routerEvent && e.routerEvent.url === '/login')))
+                e.routerEvent && e.routerEvent.url === '/login')))
+                this.showHeader = false;
+            else if ((e && (e.url === '/dummy' || e.snapshot && e.snapshot._routerState.url === '/dummy' ||
+            e.routerEvent && e.routerEvent.url === '/dummy')))
                 this.showHeader = false;
             else
                 this.showHeader = true;
