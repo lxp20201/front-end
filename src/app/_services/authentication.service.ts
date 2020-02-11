@@ -20,7 +20,7 @@ export class AuthenticationService {
     }
 
     login(data) {
-        return this.http.post<any>(`http://192.168.0.74:8080/user_api/v1/account/login_session/`,data)
+        return this.http.post<any>(`http://192.168.0.74:8082/user_api/v1/account/login_session/`,data)
             .pipe(map(user => {
                 console.log(user)
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
