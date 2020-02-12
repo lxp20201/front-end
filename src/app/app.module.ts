@@ -19,6 +19,10 @@ import { DummyComponent } from './dummy/dummy.component';
 import { CmsHomeComponent } from './cms-home/cms-home.component';
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
+import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+// import { ApolloModule } from 'apollo-angular';
+// import { HttpLinkModule } from 'apollo-angular-link-http';
 @NgModule({
     imports: [
         BrowserModule,
@@ -37,7 +41,9 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
         AlertComponent,
         HeaderComponent,
         DummyComponent,
-        CmsHomeComponent
+        CmsHomeComponent,
+        ConfirmPasswordComponent,
+        ForgetPasswordComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
