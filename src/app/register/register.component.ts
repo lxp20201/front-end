@@ -70,7 +70,6 @@ export class RegisterComponent implements OnInit {
 
             }, error => {
                 this.loading = false;
-                debugger
                 console.log(error, 'error')
                 // if (error == 'Conflict')
                 //     this.alertService.error('Mail ID already registered!');

@@ -45,6 +45,16 @@ export class AppComponent {
                 this.showHeader = false;
                 this.platform = 'CMS';
             }
+            else if ((e && (e.url === '/LMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSconfirmPassword' ||
+                e.routerEvent && e.routerEvent.url === '/LMSconfirmPassword'))) {
+                this.showHeader = false;
+                this.platform = 'LMS';
+            }
+            else if ((e && (e.url === '/CMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSconfirmPassword' ||
+                e.routerEvent && e.routerEvent.url === '/CMSconfirmPassword'))) {
+                this.showHeader = false;
+                this.platform = 'CMS';
+            }
             else if ((e && (e.url === '/CmsHome' || e.snapshot && e.snapshot._routerState.url === '/CmsHome' ||
                 e.routerEvent && e.routerEvent.url === '/CmsHome'))) {
                 this.showHeader = true;
