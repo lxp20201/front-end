@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
         });
     }
-
+    // 'http://192.168.0.44:3000/graphql'
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 

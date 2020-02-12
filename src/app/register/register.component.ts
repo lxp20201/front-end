@@ -39,7 +39,6 @@ export class RegisterComponent implements OnInit {
    
     post() {
         this.loading = true
-  
         var honor_code = true
         var terms_of_service = true
         if(this.router.url === '/LMSregister'){
@@ -58,23 +57,17 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/'], { queryParams: { registered: true } });
                     localStorage.setItem('csrfToken',JSON.stringify(data.data['signin']['data'].csrftoken));
                     localStorage.setItem('userDetails',JSON.stringify(data.data['signin']['data'].user_detail));
-                    // userDetails
                     this.userDetails = localStorage.getItem('userDetails');
-                    let details = {
-                        name: this.userDetails.name,
-                        email:this.userDetails.email,
-                        _id : this.userDetails._id
-                    }
-                    this.userService.verifyemail(details).pipe(first()).subscribe(
+                    this.userService.verifyemail(this.userDetails.email,this.userDetails._id).pipe(first()).subscribe(
                         data1 => {
+                          if(data1.data['verifyemail']['data'].success === false){
                             this.alertService.clear();
-                          if(data1['success'] === false){
-                            this.alertService.error(data1['message'])
+                            this.alertService.error(data1.data['verifyemail']['data'].message)
                           }
                         })
                 }else{
                     this.loading = false
-                    this.alertService.error(data.data['signin']['data'].message)
+                    this.alertService.error(data.data['verifyemail']['data'].message)
                 }
                 
             })

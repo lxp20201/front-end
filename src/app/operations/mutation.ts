@@ -6,7 +6,7 @@ mutation login($password:String!, $email:String!){
           data{
             success
             message
-  }
+          }
       }
 }`;
 
@@ -35,6 +35,26 @@ mutation signin(
       }
   }
 }
+}`;
+
+export const updateUser = gql`
+mutation updateUser($email:String!,$_id:String!,){
+  updateUser(email:$email, _id: $_id) {
+          data{
+            success
+            message
+  }
+      }
+}`;
+
+export const verifymail = gql`
+mutation verifymail($email:String!,$_id:String!,){
+  verifymail(email:$email, _id: $_id) {
+          data{
+            success
+            message
+           }
+      }
 }`;
 
 
