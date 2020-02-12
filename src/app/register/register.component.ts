@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
                     this.userService.verifyemail(details).pipe(first()).subscribe(
                         data1 => {
                             this.alertService.success(data1['message']);
-                            this.router.navigate(['/login']);
+                            this.router.navigate(['/LMSlogin']);
                         }, error1 => {
                             this.alertService.error('Please try again later');
                         })

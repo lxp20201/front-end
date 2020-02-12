@@ -9,7 +9,7 @@
         <div class="form-group">
             <!-- <label for="username">Username</label> -->
             <input type="text" name="username" formControlName="email" placeholder="Email *" class="form-control"
-                [ngClass]="{ 'is-invalid': f.email.touched && (f.email.errors) }" required />
+                [ngClass]="{ 'is-invalid': f.email.touched && (f.email.errors) }"/>
             <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
                 <div *ngIf="f.email.errors.pattern">Email pattern is invalid</div>
@@ -25,13 +25,12 @@
                 <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
         </div>
-        <!-- <div class="form-group"> -->
         <button class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign In
         </button><br>
-        <!-- </div> -->
-        <h4>Don't have an account ? <a routerLink="/register" class="btn-link">Register</a></h4>
+        <h4>Don't have an account ? <a routerLink="/LMSregister" *ngIf = "platform == 'LMS'" class="btn-link">Register</a>
+            <a routerLink="/CMSregister" *ngIf = "platform == 'CMS'" class="btn-link">Register</a></h4>
     </form>
 
 

@@ -8,16 +8,17 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   @Input('userActive') userActive: boolean;
+  @Input('platform') platform: string;
   @Input('showHeader') showHeader: boolean;
   constructor(private authenticationService: AuthenticationService, private router: Router, ) { }
 
   ngOnInit() {
-    // console.log(this.userActive, this.showHeader)
+    console.log(this.userActive, this.showHeader,this.platform)
   }
   logout() {
     this.authenticationService.logout();
     console.log('inside logout');
     localStorage.clear();
-    this.router.navigate(['/login'], { queryParams: { currentUser: null }});
+    this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: null }});
   }
 }

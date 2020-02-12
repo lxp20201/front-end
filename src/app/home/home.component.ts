@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit {
                                 localStorage.setItem('currentUser', JSON.stringify(data));
                                 this.router.navigate(['/home']);
                             } else {
-                                this.router.navigate(['/login']);
+                                this.router.navigate(['/LMSlogin']);
                                 this.alertService.error('Sorry! Authentication failed');
                             }
                         },
                         error => {
                             console.log(error)
-                            this.router.navigate(['/login']);
+                            this.router.navigate(['/LMSlogin']);
                             this.alertService.error('Please try after sometime');
                         });
             }
@@ -46,11 +46,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.email = this.route.snapshot.paramMap.get('email');
-        console.log(this.email)
-        // if(this.email != null)
-
-        // this.currentUser = this.route.snapshot.queryParams['currentUser'] ? this.route.snapshot.queryParams['currentUser'] : this.authenticationService.currentUserValue
-    }
+      }
 
     deleteUser(id: number) {
         this.userService.delete(id)
