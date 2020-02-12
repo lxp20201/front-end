@@ -11,9 +11,9 @@ export class UserService {
         return this.http.get<any[]>(`${environment.apiUrl}/users`);
     }
 
-    register(user) {
-        return this.http.post(`http://18.218.96.173:8082/user_api/v1/account/registration/`, user);
-    }
+    // register(user) {
+    //     return this.http.post(`http://18.218.96.173:8082/user_api/v1/account/registration/`, user);
+    // }
     verifyemail(data){
         return this.http.post(`http://18.218.96.173/v2/verifyemail`, data);
     }
