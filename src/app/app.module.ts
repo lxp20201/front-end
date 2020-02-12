@@ -17,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { DummyComponent } from './dummy/dummy.component';
 import { CmsHomeComponent } from './cms-home/cms-home.component';
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 // import { ApolloModule } from 'apollo-angular';
 // import { HttpLinkModule } from 'apollo-angular-link-http';
 @NgModule({
@@ -37,7 +38,8 @@ import { ConfirmPasswordComponent } from './confirm-password/confirm-password.co
         HeaderComponent,
         DummyComponent,
         CmsHomeComponent,
-        ConfirmPasswordComponent
+        ConfirmPasswordComponent,
+        ForgetPasswordComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
