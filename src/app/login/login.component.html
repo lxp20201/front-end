@@ -7,7 +7,6 @@
     <h1>Sign In</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <!-- <label for="username">Username</label> -->
             <input type="text" name="username" formControlName="email" placeholder="Email *" class="form-control"
                 [ngClass]="{ 'is-invalid': f.email.touched && (f.email.errors) }" />
             <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
@@ -16,7 +15,6 @@
             </div>
         </div>
         <div class="form-group">
-            <!-- <label for="password">Password</label> -->
             <input type="password" formControlName="password" placeholder="Password *" class="form-control"
                 [ngClass]="{ 'is-invalid': f.password.touched && f.password.errors }" />
             <div *ngIf="f.password.touched && f.password.errors" class="invalid-feedback">
@@ -27,8 +25,8 @@
             </div>
         </div>
         <div class="form-group">
-            <a routerLink="/CMSforgetPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
-            <a routerLink="/LMSforgetPassword" *ngIf="platform == 'LMS'" class="btn-link">Forget Password</a>
+            <a routerLink="/CMSconfirmPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
+            <a routerLink="/LMSconfirmPassword" *ngIf="platform == 'LMS'" class="btn-link forgetPs">Forget Password</a>
         </div>
         <button class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
@@ -37,6 +35,4 @@
         <h4>Don't have an account ? <a routerLink="/LMSregister" *ngIf="platform == 'LMS'" class="btn-link">Register</a>
             <a routerLink="/CMSregister" *ngIf="platform == 'CMS'" class="btn-link">Register</a></h4>
     </form>
-
-
 </div>
