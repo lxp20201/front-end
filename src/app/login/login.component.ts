@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
         });
     }
-
+    // 'http://192.168.0.44:3000/graphql'
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
@@ -40,34 +40,19 @@ export class LoginComponent implements OnInit {
         this.submitted = true;
         // reset alerts on submit
         this.alertService.clear();
-        if ((this.loginForm.value.email == null || this.loginForm.value.email == '') ||
-            (this.loginForm.value.password == null || this.loginForm.value.password == '')) {
-            this.alertService.error('Please fill required details correctly');
-        } else {
-            this.loading = true;
-            var d;
-            d = false;
-            let payload = new FormData();
-            payload.append("email", this.loginForm.value.email);
-            payload.append('password', this.loginForm.value.password);
-            payload.append('remember', d);
-            this.authenticationService.login(payload)
-                .pipe(first())
-                .subscribe(
-                    data => {
-                        console.log(data)
-                        localStorage.setItem('currentUser', JSON.stringify(data));
-                        this.router.navigate(['/home']);
-                    },
-                    error => {
-                        console.log(error)
-                        if (error == 'Forbidden') {
-                            this.loading = false;
-                            this.alertService.error('In order to sign in, you need to activate your account.');
-                        }
-                        // this.alertServic e.error(error);
-                    });
+        // stop here if form is invalid
+        if (this.loginForm.invalid) {
+            // this.alertService.error('Please fill required details correctly');
+            return;
         }
-
+        this.loading = true;
+        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email).subscribe( (result) => {
+            if (result.data['login'].data.success === true) {
+              this.router.navigate(['/me']);
+            } else {
+                this.loading = false;
+                this.alertService.error(result.data['login'].data.message)
+            }
+          });
     }
 }

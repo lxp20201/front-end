@@ -9,6 +9,7 @@ import { UserService, AuthenticationService, AlertService } from '../_services';
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
+    userDetails : any = [];
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
         private userService: UserService,
         private alertService: AlertService
     ) {     
+        console.log(this.router.url)
     }
 
     ngOnInit() {
@@ -34,54 +36,45 @@ export class RegisterComponent implements OnInit {
 
     // convenience getter for easy access to form fields///---/^[6-9]\d{9}\1*$/-------\\1{5}
     get f() { return this.registerForm.controls; }
-
+   
     post() {
-        var payload = new FormData();
-        payload.append("name", this.registerForm.value.name);
-        payload.append('username', this.registerForm.value.username);
-        payload.append('email', this.registerForm.value.email);
-        payload.append('password', this.registerForm.value.password);
-        payload.append("organization", this.registerForm.value.organization);
-        payload.append('mobile', this.registerForm.value.mobile);
-        payload.append('honor_code', 'true');
-        payload.append('terms_of_service', 'true');
         this.loading = true
-
-        let details = {
-            name: this.registerForm.value.name,
-            email: this.registerForm.value.email
+        var honor_code = true
+        var terms_of_service = true
+        if(this.router.url === '/LMSregister'){
+            var is_staff = false;
+        }else{
+            is_staff = true;
         }
-        this.userService.register(payload).pipe(first()).subscribe(
-            data => {
-                console.log(data)
-                if (data['success']) {
-                    this.userService.verifyemail(details).pipe(first()).subscribe(
+        this.authenticationService.register(this.registerForm.value.email,
+            this.registerForm.value.name,this.registerForm.value.username,honor_code,
+            terms_of_service, this.registerForm.value.password,this.registerForm.value.organization,
+            this.registerForm.value.mobile,this.registerForm.value.confirmpassword,is_staff
+          
+            ).pipe(first()).subscribe(data => {
+                if(data.data['signin']['data'].success === true){
+                    this.alertService.success('Registration successful, a mail has been sent to your account. Please Verify to login', true);
+                    this.router.navigate(['/'], { queryParams: { registered: true } });
+                    localStorage.setItem('csrfToken',JSON.stringify(data.data['signin']['data'].csrftoken));
+                    localStorage.setItem('userDetails',JSON.stringify(data.data['signin']['data'].user_detail));
+                    this.userDetails = localStorage.getItem('userDetails');
+                    this.userService.verifyemail(this.userDetails.email,this.userDetails._id).pipe(first()).subscribe(
                         data1 => {
-                            this.alertService.success(data1['message']);
-                            this.router.navigate(['/LMSlogin']);
-                        }, error1 => {
-                            this.alertService.error('Please try again later');
+                          if(data1.data['verifyemail']['data'].success === false){
+                            this.alertService.clear();
+                            this.alertService.error(data1.data['verifyemail']['data'].message)
+                          }
                         })
-                } else {
-                    debugger
-                    console.log(data, 'errr')
+                }else{
+                    this.loading = false
+                    this.alertService.error(data.data['verifyemail']['data'].message)
                 }
-                // this.router.navigate(['/'], { queryParams: { registered: true } });
-
-            }, error => {
-                this.loading = false;
-                console.log(error, 'error')
-                // if (error == 'Conflict')
-                //     this.alertService.error('Mail ID already registered!');
-                // else
-                //     this.alertService.error('Please try again later');
-            });
+                
+            })
     }
 
     onSubmit() {
-        // reset alerts on submit
         this.alertService.clear();
-        // stop here if form is invalid
         if (this.registerForm.valid) {
             this.post();
         } else if (this.registerForm.value.password != this.registerForm.value.confirmpassword) {
