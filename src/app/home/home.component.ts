@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
             .pipe(first())
             .subscribe((users : any) => {
                 this.users = users;
-                console.log(this.users)
+                // console.log(this.users)
             });
     }
 }

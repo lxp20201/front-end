@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
-// import { GraphqlModule } from './graphql/graphql.module';
+import { GraphqlModule } from './graphql/graphql.module';
 
 import { appRoutingModule } from './app.routing';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -31,7 +31,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
         appRoutingModule,
         ApolloModule,
         HttpLinkModule,
-        // GraphqlModule
+        GraphqlModule
     ],
     declarations: [
         AppComponent,
