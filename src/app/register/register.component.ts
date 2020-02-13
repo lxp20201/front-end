@@ -9,14 +9,14 @@ import { UserService, AuthenticationService, AlertService } from '../_services';
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
-    userDetails : any = [];
+    userDetails: any ;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
         private userService: UserService,
         private alertService: AlertService
-    ) {     
+    ) {
         console.log(this.router.url)
     }
 
@@ -36,41 +36,43 @@ export class RegisterComponent implements OnInit {
 
     // convenience getter for easy access to form fields///---/^[6-9]\d{9}\1*$/-------\\1{5}
     get f() { return this.registerForm.controls; }
-   
+
     post() {
         this.loading = true
         var honor_code = true
         var terms_of_service = true
-        if(this.router.url === '/LMSregister'){
+        if (this.router.url === '/LMSregister') {
             var is_staff = false;
-        }else{
+        } else {
             is_staff = true;
         }
         this.authenticationService.register(this.registerForm.value.email,
-            this.registerForm.value.name,this.registerForm.value.username,honor_code,
-            terms_of_service, this.registerForm.value.password,this.registerForm.value.organization,
-            this.registerForm.value.mobile,this.registerForm.value.confirmpassword,is_staff
-          
-            ).pipe(first()).subscribe(data => {
-                if(data.data['signin']['data'].success === true){
-                    this.alertService.success('Registration successful, a mail has been sent to your account. Please Verify to login', true);
-                    this.router.navigate(['/'], { queryParams: { registered: true } });
-                    localStorage.setItem('csrfToken',JSON.stringify(data.data['signin']['data'].csrftoken));
-                    localStorage.setItem('userDetails',JSON.stringify(data.data['signin']['data'].user_detail));
-                    this.userDetails = localStorage.getItem('userDetails');
-                    this.userService.verifyemail(this.userDetails.email,this.userDetails._id).pipe(first()).subscribe(
-                        data1 => {
-                          if(data1.data['verifyemail']['data'].success === false){
+            this.registerForm.value.name, this.registerForm.value.username, honor_code,
+            terms_of_service, this.registerForm.value.password, this.registerForm.value.organization,
+            this.registerForm.value.mobile, this.registerForm.value.confirmpassword, is_staff
+
+        ).pipe(first()).subscribe(data => {
+            if (data.data['signin']['data'].success === true) {
+                this.alertService.success('Registration successful, a mail has been sent to your account. Please Verify to login', true);
+                this.router.navigate(['/'], { queryParams: { registered: true } });
+                localStorage.setItem('csrfToken', JSON.stringify(data.data['signin']['data'].csrftoken));
+                localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
+                var u =localStorage.getItem('userDetails');
+                this.userDetails = JSON.parse(u);
+                
+                this.userService.verifyemail(this.userDetails.email,this.userDetails._id).pipe(first()).subscribe(
+                    data1 => {
+                        if (data1.data['verifyemail']['data'].success === false) {
                             this.alertService.clear();
                             this.alertService.error(data1.data['verifyemail']['data'].message)
-                          }
-                        })
-                }else{
-                    this.loading = false
-                    this.alertService.error(data.data['verifyemail']['data'].message)
-                }
-                
-            })
+                        }
+                    })
+            } else {
+                this.loading = false
+                this.alertService.error(data.data['signin']['data'].message)
+            }
+
+        })
     }
 
     onSubmit() {

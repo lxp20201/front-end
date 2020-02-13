@@ -38,16 +38,14 @@ export class UserService {
           });
       }
 
-      verifyemail(email,_id) {
+      verifyemail(email,id) {
         return this.Apollo
           .mutate({
-            mutation: verifymail,
+            mutation:verifymail,
             variables: {
-                email: email,
-                _id: _id,
+                email:"raj4114591134@gmail.com",
+                _id:"5e43c7a8190ffd383063ec9bs",
             }
           });
-      }
-
-      
+      }   
 }
