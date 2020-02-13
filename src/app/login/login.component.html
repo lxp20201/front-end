@@ -5,7 +5,7 @@
     <img class="logoImg" src="assets/logo.png" a routerLink="/">
     <br>
     <h1>Sign In</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" >
         <div class="form-group">
             <input type="text" name="username" formControlName="email" placeholder="Email *" class="form-control"
                 [ngClass]="{ 'is-invalid': f.email.touched && (f.email.errors) }" />
@@ -28,7 +28,7 @@
             <a routerLink="/CMSForgetPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
             <a routerLink="/LMSForgetPassword" *ngIf="platform == 'LMS'" class="btn-link forgetPs">Forget Password</a>
         </div>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" (ngSubmit)="onSubmit()">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign In
         </button><br>

@@ -1,4 +1,4 @@
-<app-header [userActive] = "activeUser" [showHeader] = "showHeader" [platform] = "platform"></app-header>
+<app-header [userActive]="activeUser" [showHeader]="showHeader" [platform]="platform"></app-header>
 <!-- main content container -->
 <div class="jumbotron">
     <div class="container">
@@ -8,5 +8,13 @@
                 <router-outlet></router-outlet>
             </div>
         </div>
+        <div class="space"></div>
     </div>
+    <div class="space"></div>
+</div>
+
+<div class="footer">
+    <button class="courseCreator"  routerLink="/CmsHome">
+        Want to be Course creator ?
+    </button>
 </div>
