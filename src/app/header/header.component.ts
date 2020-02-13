@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     console.log(this.userActive, this.showHeader,this.platform)
   }
   logout() {
-    this.authenticationService.logout();
+    // this.authenticationService.logout();
     console.log('inside logout');
     localStorage.clear();
     this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: null }});

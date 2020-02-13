@@ -1,25 +1,126 @@
 /* You can add global styles to this file, and also import other style files */
 .jumbotron {
-    padding: 0px;
+    padding: 0px 0px;
     background-color: white !important;
 }
 
 .bg-dark {
-    background-color: #dbdcde !important
+    background-color: white !important
 }
 
 .navbar-expand {
     justify-content: flex-end;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+    position: fixed !important;
+    z-index: 20;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #007bff;
+    color: white;
     font-weight: 500;
-    font-size: large;
-}
-.navbar-expand .navbar-nav { 
-    min-height : 6vh;
+    font-size: 16px;
+    text-transform: uppercase;
+    border: 1px solid #c9cbce;
+    padding: 12px;
+    margin: 2vh 3vh 0 0;
     height: 6vh;
+    border-radius: 5px;
+    background: #007bff;
+}
+
+.navbar-expand .navbar-nav {
+    min-height: 10vh;
+    height: 10vh;
+}
+
+.learnImg {
+    padding: 10vh 0px 0px 0px;
+    height: 80vh;
+    width: 100%;
+    animation: fadein 1s;
+    -moz-animation: fadein 1s;
+    -webkit-animation: fadein 1s;
+    -o-animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.learning {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    position: absolute;
+    color: white;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 27vh;
+    font-size: 8rem;
+    text-shadow: 7px 7px black;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.investment {
+    animation: fadein 1s;
+    -moz-animation: fadein 1s;
+    -webkit-animation: fadein 1s;
+    -o-animation: fadein 1s;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 50vh;
+    font-size: 35px;
+    text-shadow: 2px 2px #110c05;
+}
+
+.colorGold {
+    color: #f9a910;
 }
 
 .behind {
@@ -70,7 +171,9 @@ body {
 }
 
 .logoImgHeader {
-    width: 6%;
+    width: 10%;
+    margin: 0% 0 0 5%;
+    padding: 10px;
 }
 
 h1 {
@@ -79,7 +182,9 @@ h1 {
     color: #707070;
     font-weight: 600 !important;
 }
-h2, h3 {
+
+h2,
+h3 {
     text-align: center;
 }
 
@@ -147,4 +252,64 @@ button {
 
 .alert-success {
     text-align: center
+}
+
+.ex1 {
+    margin: 0% 12% 0% 12%;
+    width: 76%;
+    height: 400px;
+}
+
+.ex2 {
+    position: relative;
+    height: 100%;
+    background: #f2f2f2;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 4px 16px rgba(189, 189, 189, 0.24);
+    box-shadow: 0px 4px 16px rgba(189, 189, 189, 0.24);
+    cursor: pointer;
+}
+
+.eximg {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+}
+
+.exp {
+    width: 90%;
+    margin: 0% 5% 0% 5%;
+    height: 120px;
+    position: relative;
+    bottom: 10%;
+    background: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 4px 16px rgba(189, 189, 189, 0.24);
+    box-shadow: 0px 4px 16px rgba(189, 189, 189, 0.24);
+}
+
+.soon {
+    padding: 10%;
+    font-size: 20px;
+    color: gray;
+    text-align: center;
+}
+
+.exploreBar {
+    background-color:
+    beige;
+    height: 7%;
+    font-size: 30px;
+    padding: 1%;
+    text-align: center;
+    color:
+    darkred;
+}
+.rowforGrid {
+    width : 90%;
+    margin-left: 5%;
+    display: inline-flex;
+}
+.columnforGrid{
+    width : 33%;
 }

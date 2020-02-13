@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { UserService, AuthenticationService, AlertService } from '../_services';
+import { UserService, AuthenticationService, AlertService, courseCreaterService } from '../_services';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({ templateUrl: 'home.component.html' })
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     email: string;
 
     constructor(
-        private authenticationService: AuthenticationService, private router: Router,
+        private authenticationService: AuthenticationService, private router: Router, public coursecreaterService : courseCreaterService,
         private userService: UserService, private route: ActivatedRoute, private alertService: AlertService
     ) {
         this.route.queryParams.subscribe(params => {
@@ -45,19 +45,20 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadAllCourses()
         this.email = this.route.snapshot.paramMap.get('email');
       }
 
-    deleteUser(id: number) {
-        this.userService.delete(id)
-            .pipe(first())
-            .subscribe(() => this.loadAllUsers());
-    }
+    // deleteUser(id: number) {
+    //     this.userService.delete(id)
+    //         .pipe(first())
+    //         .subscribe(() => this.loadAllCourses());
+    // }
 
-    private loadAllUsers() {
-        this.userService.getAll()
+    private loadAllCourses() {
+        this.coursecreaterService.getCourse()
             .pipe(first())
-            .subscribe((users) => {
+            .subscribe((users : any) => {
                 this.users = users;
                 console.log(this.users)
             });

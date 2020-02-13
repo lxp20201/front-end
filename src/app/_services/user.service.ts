@@ -22,7 +22,6 @@ export class UserService {
         return this.http.get(`http://18.218.96.173/v2/getuserdetails?email=`+email);
     }
     
-
     delete(id) {
         return this.http.delete(`${environment.apiUrl}/users/${id}`);
     }
