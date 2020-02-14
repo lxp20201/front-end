@@ -30,9 +30,12 @@ export class HomeComponent implements OnInit {
                         data => {
                             console.log(data);
                             if (data.data['updateUser'].data.success === true) {
+                                console.log('1,,,,,,,,,',data.data['updateUser'].data.success)
                                 localStorage.setItem('currentUser', JSON.stringify(data));
                                 this.router.navigate(['/home']);
                             } else {
+                                console.log('2,,,,,,,,,',data.data['updateUser'].data.success)
+                                this.router.navigate(['/dummy'])
                                 this.router.navigate(['/LMSlogin']);
                                 this.alertService.error(data.data['updateUser'].data.message);
                             }

@@ -24,15 +24,15 @@
                 <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <a routerLink="/CMSForgetPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
             <a routerLink="/LMSForgetPassword" *ngIf="platform == 'LMS'" class="btn-link forgetPs">Forget Password</a>
-        </div>
+        </div> -->
         <button class="btn btn-primary" (click)="onSubmit()">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign In
         </button><br>
-        <h4>Don't have an account ? <a routerLink="/LMSregister" *ngIf="platform == 'LMS'" class="btn-link">Register</a>
+        <h4 *ngIf="platform == 'LMS' || platform == 'CMS'" >Don't have an account ? <a routerLink="/LMSregister" *ngIf="platform == 'LMS'" class="btn-link">Register</a>
             <a routerLink="/CMSregister" *ngIf="platform == 'CMS'" class="btn-link">Register</a></h4>
     </form>
 </div>

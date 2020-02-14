@@ -11,20 +11,31 @@ export class AppComponent {
     platform: any;
 
     constructor(
-        private router: Router ) {
+        private router: Router) {
         // this.authenticationService.currentUser.subscribe((x) => {
         //     this.currentUser = x;
         //     this.activeUser = this.currentUser ? true : false;
         //     console.log(this.activeUser)
         // });
-        this.currentUser = localStorage.getItem('currentUser');
-        this.activeUser = this.currentUser ? true : false;
-    }
 
+    }
+    logout() {
+        // this.authenticationService.logout();
+        console.log('inside logout');
+        this.activeUser = false;
+        localStorage.clear();
+        if (this.platform == 'LMS')
+            this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: null } });
+        else
+            this.router.navigate(['/CMSlogin'], { queryParams: { currentUser: null } });
+    }
     ngOnInit() {
         this.platform = null
         this.router.events.subscribe((e: any) => {
             // console.log(e)
+            this.currentUser = localStorage.getItem('currentUser');
+            this.activeUser = this.currentUser ? true : false;
+            console.log('wedfsdfds', this.currentUser, this.activeUser)
             if ((e && (e.url === '/LMSregister' || e.snapshot && e.snapshot._routerState.url === '/LMSregister' ||
                 e.routerEvent && e.routerEvent.url === '/LMSregister'))) {
                 this.showHeader = false;
