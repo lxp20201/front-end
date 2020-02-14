@@ -26,13 +26,13 @@ export class UserService {
         return this.http.delete(`${environment.apiUrl}/users/${id}`);
     }
 
-    updateProfile(email,_id) {
+    updateProfile(email,id) {
         return this.Apollo
           .mutate({
             mutation: updateUser,
             variables: {
                 email: email,
-                _id: _id,
+                _id: id,
             }
           });
       }

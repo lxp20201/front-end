@@ -21,7 +21,9 @@ export class HomeComponent implements OnInit {
             if (email) {
                 this.router.navigate(['/dummy'])
                 console.log(email); // Print the parameter to the console. 
-                this.userDetails = localStorage.getItem('userDetails');
+                var user = localStorage.getItem('userDetails');
+                this.userDetails = JSON.parse(user);
+                console.log(this.userDetails ,this.userDetails._id)
                 this.userService.updateProfile(email,this.userDetails._id)
                     .pipe(first())
                     .subscribe(
