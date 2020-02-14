@@ -1,49 +1,54 @@
 <!-- <app-header [userActive]="activeUser" [showHeader]="showHeader" [platform]="platform"></app-header> -->
 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="activeUser && showHeader">
-    <div class="navbar-nav header-logo">
-      <img class="logoImgHeader" src="assets/logo.png" a routerLink="/">
-    </div>
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/">Home</a>
-      <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
-  </nav>
-  
-  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'LMS'">
-    <div class="navbar-nav">
-      <img class="logoImgHeader" src="assets/logo.png" >
-    </div>
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/LMSlogin">Login</a>
-      <a class="nav-item nav-link" routerLink="/LMSregister">Register</a>
-    </div>
-  </nav>
-  
-  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'CMS'">
-    <div class="navbar-nav">
-      <img class="logoImgHeader" src="assets/logo.png" >
-    </div>
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/CMSlogin">Login</a>
-      <a class="nav-item nav-link" routerLink="/CMSregister">Register</a>
-    </div>
-  </nav>
+  <div class="navbar-nav header-logo">
+    <img class="logoImgHeader" src="assets/logo.png" a routerLink="/">
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Home</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'LMS'">
+  <div class="navbar-nav">
+    <img class="logoImgHeader" src="assets/logo.png">
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/LMSlogin">Login</a>
+    <a class="nav-item nav-link" routerLink="/LMSregister">Register</a>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'CMS'">
+  <div class="navbar-nav">
+    <img class="logoImgHeader" src="assets/logo.png">
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/CMSlogin">Login</a>
+    <a class="nav-item nav-link" routerLink="/CMSregister">Register</a>
+  </div>
+</nav>
 
 <!-- main content container -->
 <div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 offset-sm-12">
-                <alert></alert>
-                <router-outlet></router-outlet>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 offset-sm-12">
+        <alert></alert>
+        <router-outlet></router-outlet>
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="footer">
-    <button class="courseCreator"  routerLink="/CmsHome">
-        Want to be Course creator ?
-    </button>
+<div class="footer" *ngIf="platform == 'LMS'">
+  <button class="courseCreator" routerLink="/CmsHome">
+    Want to be Course creator ?
+  </button>
+</div>
+<div class="footer" *ngIf="platform == 'CMS'">
+  <button class="courseCreator" routerLink="/">
+    Want to be a learner ?
+  </button>
 </div>
