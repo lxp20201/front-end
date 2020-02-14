@@ -28,7 +28,7 @@
             <a routerLink="/CMSForgetPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
             <a routerLink="/LMSForgetPassword" *ngIf="platform == 'LMS'" class="btn-link forgetPs">Forget Password</a>
         </div>
-        <button class="btn btn-primary" (ngSubmit)="onSubmit()">
+        <button class="btn btn-primary" (click)="onSubmit()">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Sign In
         </button><br>

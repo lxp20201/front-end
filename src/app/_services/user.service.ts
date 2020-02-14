@@ -42,8 +42,8 @@ export class UserService {
           .mutate({
             mutation:verifymail,
             variables: {
-                email:"raj4114591134@gmail.com",
-                _id:"5e43c7a8190ffd383063ec9bs",
+                email:email,
+                _id:id,
             }
           });
       }   

@@ -46,13 +46,16 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email).subscribe( (result) => {
+        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email).subscribe((result) => {
+            console.log(result)
             if (result.data['login'].data.success === true) {
-              this.router.navigate(['/me']);
+                localStorage.setItem('currentUser', 'true')
+                this.router.navigate(['/home']);
+                this.loading = false;
             } else {
                 this.loading = false;
                 this.alertService.error(result.data['login'].data.message)
             }
-          });
+        });
     }
 }
