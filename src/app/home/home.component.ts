@@ -21,16 +21,21 @@ export class HomeComponent implements OnInit {
             if (email) {
                 this.router.navigate(['/dummy'])
                 console.log(email); // Print the parameter to the console. 
-                this.userDetails = localStorage.getItem('userDetails');
+                var user = localStorage.getItem('userDetails');
+                this.userDetails = JSON.parse(user);
+                console.log(this.userDetails ,this.userDetails._id)
                 this.userService.updateProfile(email,this.userDetails._id)
                     .pipe(first())
                     .subscribe(
                         data => {
                             console.log(data);
                             if (data.data['updateUser'].data.success === true) {
+                                console.log('1,,,,,,,,,',data.data['updateUser'].data.success)
                                 localStorage.setItem('currentUser', JSON.stringify(data));
                                 this.router.navigate(['/home']);
                             } else {
+                                console.log('2,,,,,,,,,',data.data['updateUser'].data.success)
+                                this.router.navigate(['/dummy'])
                                 this.router.navigate(['/LMSlogin']);
                                 this.alertService.error(data.data['updateUser'].data.message);
                             }

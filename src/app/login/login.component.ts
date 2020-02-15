@@ -51,11 +51,15 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email,this.is_staff).subscribe( (result) => {
             if (result.data['login'].data.success === true) {
-              this.router.navigate(['/me']);
+                console.log(result)
+                localStorage.setItem('currentUser', 'true')
+                this.router.navigate(['/home']);
+                this.loading = false;
             } else {
+                console.log(result)
                 this.loading = false;
                 this.alertService.error(result.data['login'].data.message)
             }
-          });
+        });
     }
 }

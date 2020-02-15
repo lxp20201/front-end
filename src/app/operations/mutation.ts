@@ -16,7 +16,7 @@ mutation signin(
   $honor_code:Boolean!,
   $terms_of_service:Boolean!,$password:String!,
   $organization:String!,$mobile:String!,
-  $confirmpassword:String!$is_staff:Boolean!,){
+  $confirmpassword:String!$is_staff:Boolean!){
 
   signin(email:$email,name : $name,
   username:$username,honor_code:$honor_code,
@@ -56,6 +56,3 @@ mutation verifymail($email:String,$id:String){
     }    
   }
 }`;
-
-
-//hard code value pass kr k de

@@ -21,16 +21,6 @@ export class AuthenticationService {
         return this.currentUserSubject.value || null;
     }
 
-    // login(data) {
-    //     return this.http.post<any>(`http://192.168.0.74:8082/user_api/v1/account/login_session/`,data)
-    //         .pipe(map(user => {
-    //             console.log(user)
-    //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //             localStorage.setItem('currentUser', JSON.stringify(user));
-    //             this.currentUserSubject.next(user);
-    //             return user;
-    //         }));
-    // }
 
     login(password,email,is_staff) {
         return this.Apollo
