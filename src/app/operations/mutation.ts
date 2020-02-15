@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const login = gql`
-mutation login($password:String!, $email:String!){
-        login(password:$password, email:$email, remember: false) {
+mutation login($password:String!, $email:String!,$is_staff:Boolean!){
+        login(password:$password, email:$email, remember: false,is_staff:$is_staff) {
           data{
             success
             message

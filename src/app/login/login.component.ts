@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     submitted = false;
     loading = false;
     returnUrl: string;
+    is_staff : boolean
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -25,8 +26,10 @@ export class LoginComponent implements OnInit {
         console.log('e', this.router.url)
         if (this.router.url == '/LMSlogin')
             this.platform = 'LMS'
+            this.is_staff = false
         if (this.router.url == '/CMSlogin')
             this.platform = 'CMS'
+            this.is_staff = true
         this.loginForm = this.formBuilder.group({
             email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
@@ -46,7 +49,7 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.loading = true;
-        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email).subscribe( (result) => {
+        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email,this.is_staff).subscribe( (result) => {
             if (result.data['login'].data.success === true) {
               this.router.navigate(['/me']);
             } else {
