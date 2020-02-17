@@ -4,10 +4,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first } from 'rxjs/operators';
 import { MustMatch } from '../_helpers/must-match.validator';
 import { UserService, AuthenticationService, AlertService } from '../_services';
-import swal from 'sweetalert';
-
+import Swal from 'sweetalert2'
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
+
     registerForm: FormGroup;
     loading = false;
     userDetails: any;
@@ -27,8 +27,12 @@ export class RegisterComponent implements OnInit {
             this.platform = 'LMS'
         if (this.router.url == '/CMSregister')
             this.platform = 'CMS'
+        console.log(this.platform)
         this.registerForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
+            username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
+            name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
+            email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
+            mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
             organization: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
             confirmpassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
@@ -57,7 +61,7 @@ export class RegisterComponent implements OnInit {
         ).pipe(first()).subscribe(data => {
             if (data.data['signin']['data'].success === true) {
                 this.registerForm.reset()
-                swal('Registration successful, a mail has been sent to your account. Please Verify to login');
+                Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
                 // this.router.navigate(['/'], { queryParams: { registered: true } });
                 localStorage.setItem('csrfToken', JSON.stringify(data.data['signin']['data'].csrftoken));
                 localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
@@ -66,28 +70,34 @@ export class RegisterComponent implements OnInit {
                 this.userService.verifyemail(this.userDetails.email, this.userDetails._id).pipe(first()).subscribe(
                     data1 => {
                         if (data1.data['verifyemail']['data'].success === false) {
-
                             this.registerForm.reset()
-                            swal(data1.data['verifyemail']['data'].message)
+                            Swal.fire(data1.data['verifyemail']['data'].message)
                         }
                     })
             } else {
                 this.loading = false
                 this.registerForm.reset()
-                swal(data.data['signin']['data'].message)
+                Swal.fire({
+                    title: 'Failed!',
+                    text: data.data['signin']['data'].message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+                // swal(data.data['signin']['data'].message, '', 'error')
             }
-
         })
     }
 
     onSubmit() {
         if (this.registerForm.valid) {
             this.post();
-        } else if (this.registerForm.value.password != this.registerForm.value.confirmpassword) {
-            swal('Passwords doesnt match');
-            return;
         } else {
-            swal('Please fill all mandatory fields !');
+            Swal.fire({
+                title: 'Required!',
+                text: 'Please fill required details correctly',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
             return;
         }
     }
