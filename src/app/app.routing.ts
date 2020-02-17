@@ -8,6 +8,7 @@ import { AuthGuard } from './_helpers';
 import { DummyComponent } from './dummy';
 import { CmsHomeComponent } from './cms-home/cms-home.component';
 import { ConfirmPasswordComponent } from './confirm-password';
+import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: '', component: HomeComponent  },
     { path : 'dummy', component: DummyComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
+    { path : 'admin', component: AdminComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

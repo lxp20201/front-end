@@ -21,6 +21,7 @@ import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 import { ConfirmPasswordComponent } from './confirm-password/confirm-password.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { AdminComponent } from './admin/admin.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -41,7 +42,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
         DummyComponent,
         CmsHomeComponent,
         ConfirmPasswordComponent,
-        ForgetPasswordComponent
+        ForgetPasswordComponent,
+        AdminComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
