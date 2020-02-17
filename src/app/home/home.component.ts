@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 
 import { UserService, AuthenticationService, AlertService, courseCreaterService } from '../_services';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import swal from 'sweetalert';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
 
@@ -37,13 +37,13 @@ export class HomeComponent implements OnInit {
                                 console.log('2,,,,,,,,,',data.data['updateUser'].data.success)
                                 this.router.navigate(['/dummy'])
                                 this.router.navigate(['/LMSlogin']);
-                                this.alertService.error(data.data['updateUser'].data.message);
+                                swal(data.data['updateUser'].data.message);
                             }
                         },
                         error => {
                             console.log(error)
                             this.router.navigate(['/LMSlogin']);
-                            this.alertService.error('Please try after sometime');
+                            swal('Please try after sometime');
                         });
             }
 

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first } from 'rxjs/operators';
 import { AuthenticationService, AlertService } from '../_services'
 import { AppComponent } from '../app.component';
-
+import swal from 'sweetalert';
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     platform: string;
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('e', this.router.url)
         if (this.router.url == '/LMSlogin')
             this.platform = 'LMS'
         if (this.router.url == '/CMSlogin')
@@ -39,7 +38,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
         // reset alerts on submit
-        this.alertService.clear();
+        // this.alertService.clear();
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             // this.alertService.error('Please fill required details correctly');
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
             } else {
                 console.log(result)
                 this.loading = false;
-                this.alertService.error(result.data['login'].data.message)
+                swal(result.data['login'].data.message)
             }
         });
     }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first } from 'rxjs/operators';
 import { MustMatch } from '../_helpers/must-match.validator';
 import { UserService, AuthenticationService, AlertService } from '../_services';
+import swal from 'sweetalert';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
@@ -27,10 +28,7 @@ export class RegisterComponent implements OnInit {
         if (this.router.url == '/CMSregister')
             this.platform = 'CMS'
         this.registerForm = this.formBuilder.group({
-            name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(100)]),
-            username: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z ]+$/), Validators.minLength(3), Validators.maxLength(30)]),
-            email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-            mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
+            name: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(/^[6-9]\d{9}\1*$/)]),
             organization: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z 0-9]+$/), Validators.minLength(3), Validators.maxLength(100)]),
             password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),
             confirmpassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)])
@@ -59,7 +57,7 @@ export class RegisterComponent implements OnInit {
         ).pipe(first()).subscribe(data => {
             if (data.data['signin']['data'].success === true) {
                 this.registerForm.reset()
-                this.alertService.success('Registration successful, a mail has been sent to your account. Please Verify to login', true);
+                swal('Registration successful, a mail has been sent to your account. Please Verify to login');
                 // this.router.navigate(['/'], { queryParams: { registered: true } });
                 localStorage.setItem('csrfToken', JSON.stringify(data.data['signin']['data'].csrftoken));
                 localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
@@ -68,29 +66,28 @@ export class RegisterComponent implements OnInit {
                 this.userService.verifyemail(this.userDetails.email, this.userDetails._id).pipe(first()).subscribe(
                     data1 => {
                         if (data1.data['verifyemail']['data'].success === false) {
-                            this.alertService.clear();
+
                             this.registerForm.reset()
-                            this.alertService.error(data1.data['verifyemail']['data'].message)
+                            swal(data1.data['verifyemail']['data'].message)
                         }
                     })
             } else {
                 this.loading = false
                 this.registerForm.reset()
-                this.alertService.error(data.data['signin']['data'].message)
+                swal(data.data['signin']['data'].message)
             }
 
         })
     }
 
     onSubmit() {
-        this.alertService.clear();
         if (this.registerForm.valid) {
             this.post();
         } else if (this.registerForm.value.password != this.registerForm.value.confirmpassword) {
-            this.alertService.error('Passwords doesnt match');
+            swal('Passwords doesnt match');
             return;
         } else {
-            this.alertService.error('Please fill all mandatory fields !');
+            swal('Please fill all mandatory fields !');
             return;
         }
     }
