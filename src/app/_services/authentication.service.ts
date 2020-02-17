@@ -22,14 +22,16 @@ export class AuthenticationService {
     }
 
 
-    login(password,email) {
+    login(password,email,is_staff) {
         return this.Apollo
           .mutate({
             mutation: login,
             variables: {
                 password: password,
                 email: email,
-                remember: false
+                remember: false,
+                is_staff:is_staff
+
             }
           });
       }
