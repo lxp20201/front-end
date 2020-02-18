@@ -23,6 +23,7 @@ import { ConfirmPasswordComponent } from './confirm-password/confirm-password.co
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { CourseCreationComponent } from './course-creation/course-creation.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -45,7 +46,8 @@ import { AdminhomeComponent } from './adminhome/adminhome.component';
         ConfirmPasswordComponent,
         ForgetPasswordComponent,
         AdminComponent,
-        AdminhomeComponent
+        AdminhomeComponent,
+        CourseCreationComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

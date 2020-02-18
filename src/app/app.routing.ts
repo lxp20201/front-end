@@ -10,6 +10,7 @@ import { CmsHomeComponent } from './cms-home/cms-home.component';
 import { ConfirmPasswordComponent } from './confirm-password';
 import { AdminComponent } from './admin/admin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
+import { CourseCreationComponent } from './course-creation/course-creation.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -21,11 +22,12 @@ const routes: Routes = [
     { path: 'CMSForgetPassword', component: ForgetPasswordComponent },
     { path: 'CMSconfirmPassword', component: ConfirmPasswordComponent },
     { path: 'LMSconfirmPassword', component: ConfirmPasswordComponent },
-    { path: '', component: HomeComponent },
-    { path: 'dummy', component: DummyComponent },
-    { path: 'CmsHome', component: CmsHomeComponent },
-    { path: 'admin', component: AdminComponent },
-    { path: 'adminDashboard', component: AdminhomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: HomeComponent  },
+    { path : 'dummy', component: DummyComponent},
+    { path : 'CmsHome', component: CmsHomeComponent},
+    { path : 'admin', component: AdminComponent},
+    { path : 'adminDashboard', component: AdminhomeComponent},
+    { path : 'courseCreation', component: CourseCreationComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
