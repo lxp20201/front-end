@@ -9,7 +9,7 @@ import { DummyComponent } from './dummy';
 import { CmsHomeComponent } from './cms-home/cms-home.component';
 import { ConfirmPasswordComponent } from './confirm-password';
 import { AdminComponent } from './admin/admin.component';
-
+import { AdminhomeComponent } from './adminhome/adminhome.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -25,6 +25,7 @@ const routes: Routes = [
     { path : 'dummy', component: DummyComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
     { path : 'admin', component: AdminComponent},
+    { path : 'dashboard', component: AdminhomeComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

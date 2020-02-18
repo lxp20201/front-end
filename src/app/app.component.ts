@@ -89,6 +89,18 @@ export class AppComponent {
             else if ((e && (e.url === '/dummy' || e.snapshot && e.snapshot._routerState.url === '/dummy' ||
                 e.routerEvent && e.routerEvent.url === '/dummy')))
                 this.showHeader = false;
+
+                else if ((e && (e.url === '/dashboard' || e.snapshot && e.snapshot._routerState.url === '/dashboard' ||
+                e.routerEvent && e.routerEvent.url === '/dashboard'))){
+                    this.showHeader = true;
+                    this.platform = 'Admin';
+                }
+
+                else if ((e && (e.url === '/admin' || e.snapshot && e.snapshot._routerState.url === '/admin' ||
+                e.routerEvent && e.routerEvent.url === '/admin'))){
+                    this.showHeader = false;
+                    this.platform = 'Admin';
+                }
             else
                 this.showHeader = true;
 

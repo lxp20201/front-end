@@ -1,11 +1,11 @@
 
-<div class="column1 behind">
-</div>
 
+   <div class="card card-5">
 <div class="column2">
     <img class="logoImg" src="assets/logo.png" a routerLink="/">
     <br>
-    <h1>Admin Sign In</h1>
+    <h1>Login</h1>
+ 
     <form [formGroup]="loginForm" >
         <div class="form-group">
             <input type="text" name="username" formControlName="email" placeholder="Email *" class="form-control"
@@ -29,9 +29,10 @@
             <a routerLink="/CMSForgetPassword" *ngIf="platform == 'CMS'" class="btn-link forgetPs">Forget Password</a>
             <a routerLink="/LMSForgetPassword" *ngIf="platform == 'LMS'" class="btn-link forgetPs">Forget Password</a>
         </div> -->
-        <button class="btn btn-primary" (click)="onSubmit()">
+        <button class="btn btn-primary login" (click)="onSubmit()">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Submit
         </button><br>
     </form>
+</div>
 </div>
