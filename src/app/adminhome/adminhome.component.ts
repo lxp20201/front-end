@@ -16,14 +16,12 @@ export class AdminhomeComponent implements OnInit {
     this.authenticationService.admin_dashboard(true).subscribe((result : any) => {
       if (result.data.admin_dashboard.success === true) {
         this.cmsUsers = result.data.admin_dashboard.message;
-        console.log(this.cmsUsers);
       } else {
       }
     });
     this.authenticationService.admin_dashboard(false).subscribe((result: any) => {
       if (result.data.admin_dashboard.success === true) {
         this.lmsUsers = result.data.admin_dashboard.message;
-        console.log(this.lmsUsers);
       } else {
       }
     });

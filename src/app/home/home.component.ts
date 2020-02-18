@@ -10,37 +10,33 @@ export class HomeComponent implements OnInit {
     users = [];
     activeUser: boolean;
     email: string;
-    userDetails : any = [];
+    userDetails: any = [];
     constructor(
-        private authenticationService: AuthenticationService, private router: Router, public coursecreaterService : courseCreaterService,
+        private authenticationService: AuthenticationService, private router: Router, public coursecreaterService: courseCreaterService,
         private userService: UserService, private route: ActivatedRoute, private alertService: AlertService
     ) {
         this.route.queryParams.subscribe(params => {
             let email = params['email'];
             if (email) {
                 this.router.navigate(['/dummy'])
-                console.log(email); // Print the parameter to the console. 
                 var user = localStorage.getItem('userDetails');
                 this.userDetails = JSON.parse(user);
-                console.log(this.userDetails ,this.userDetails._id)
-                this.userService.updateProfile(email,this.userDetails._id)
+                this.userService.updateProfile(email, this.userDetails._id)
                     .pipe(first())
                     .subscribe(
                         data => {
-                            console.log(data);
                             if (data.data['updateUser'].data.success === true) {
-                                console.log('1,,,,,,,,,',data.data['updateUser'].data.success)
-                                localStorage.setItem('currentUser', JSON.stringify(data));
+                                localStorage.setItem('currentUser', 'true');
                                 this.router.navigate(['/home']);
                             } else {
-                                console.log('2,,,,,,,,,',data.data['updateUser'].data.success)
+                                localStorage.setItem('currentUser', null)
                                 this.router.navigate(['/dummy'])
                                 this.router.navigate(['/LMSlogin']);
                                 Swal.fire(data.data['updateUser'].data.message);
                             }
                         },
                         error => {
-                            console.log(error)
+                            localStorage.setItem('currentUser', null)
                             this.router.navigate(['/LMSlogin']);
                             Swal.fire('Please try after sometime');
                         });
@@ -52,7 +48,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.loadAllCourses()
         this.email = this.route.snapshot.paramMap.get('email');
-      }
+    }
 
     // deleteUser(id: number) {
     //     this.userService.delete(id)
@@ -63,7 +59,7 @@ export class HomeComponent implements OnInit {
     private loadAllCourses() {
         this.coursecreaterService.getCourse()
             .pipe(first())
-            .subscribe((users : any) => {
+            .subscribe((users: any) => {
                 this.users = users;
                 // console.log(this.users)
             });

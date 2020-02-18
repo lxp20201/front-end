@@ -55,7 +55,6 @@ export class AuthenticationService {
   }
 
   admin_dashboard(is_staff) {
-    console.log(is_staff)
     return this.Apollo
       .mutate({
         mutation: admin_dashboard,

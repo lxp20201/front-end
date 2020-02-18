@@ -12,22 +12,17 @@ export class AppComponent {
 
     constructor(
         private router: Router) {
-        // this.authenticationService.currentUser.subscribe((x) => {
-        //     this.currentUser = x;
-        //     this.activeUser = this.currentUser ? true : false;
-        //     console.log(this.activeUser)
-        // });
-
     }
     logout() {
         // this.authenticationService.logout();
-        console.log('inside logout');
         this.activeUser = false;
-        localStorage.clear();
+        localStorage.setItem('currentUser', null)
         if (this.platform == 'LMS')
-            this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: null } });
+            this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: false } });
+        else if (this.platform == 'Admin')
+            this.router.navigate(['/admin'], { queryParams: { currentUser: false } });
         else
-            this.router.navigate(['/CMSlogin'], { queryParams: { currentUser: null } });
+            this.router.navigate(['/CMSlogin'], { queryParams: { currentUser: false } });
     }
     ngOnInit() {
         this.platform = null
@@ -35,7 +30,6 @@ export class AppComponent {
             // console.log(e)
             this.currentUser = localStorage.getItem('currentUser');
             this.activeUser = this.currentUser ? true : false;
-            console.log('wedfsdfds', this.currentUser, this.activeUser)
             if ((e && (e.url === '/LMSregister' || e.snapshot && e.snapshot._routerState.url === '/LMSregister' ||
                 e.routerEvent && e.routerEvent.url === '/LMSregister'))) {
                 this.showHeader = false;
@@ -93,6 +87,7 @@ export class AppComponent {
             }
             else if ((e && (e.url === '/admin' || e.snapshot && e.snapshot._routerState.url === '/admin' ||
                 e.routerEvent && e.routerEvent.url === '/admin'))) {
+                this.activeUser = false
                 this.showHeader = false;
                 this.platform = 'Admin';
             }

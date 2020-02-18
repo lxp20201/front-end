@@ -4,14 +4,14 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { AuthenticationService, AlertService } from '../_services'
 import { AppComponent } from '../app.component';
 import Swal from 'sweetalert2'
-@Component({ templateUrl: 'login.component.html' })
+@Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.less'] })
 export class LoginComponent implements OnInit {
     platform: string;
     loginForm: FormGroup;
     submitted = false;
     loading = false;
     returnUrl: string;
-    is_staff : boolean
+    is_staff: boolean
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
             this.platform = 'LMS'
             this.is_staff = false
         }
-        if (this.router.url == '/CMSlogin'){
+        if (this.router.url == '/CMSlogin') {
             this.platform = 'CMS'
             this.is_staff = true
         }
@@ -46,23 +46,24 @@ export class LoginComponent implements OnInit {
                 text: 'Please fill required details correctly',
                 icon: 'error',
                 confirmButtonText: 'OK'
-              })
+            })
             return;
         }
         this.loading = true;
-        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email,this.is_staff).subscribe( (result) => {
+        this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email, this.is_staff).subscribe((result) => {
             if (result.data['login'].data.success === true) {
                 localStorage.setItem('currentUser', 'true')
                 this.router.navigate(['/home']);
                 this.loading = false;
             } else {
+                localStorage.setItem('currentUser', null)
                 this.loading = false;
                 Swal.fire({
                     title: 'Failed!',
                     text: result.data['login'].data.message,
                     icon: 'error',
                     confirmButtonText: 'OK'
-                  })
+                })
             }
         });
     }

@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) {
+      this.loginForm.reset();
       Swal.fire({
         title: 'Required!',
         text: 'Please fill required details correctly',
@@ -40,6 +41,8 @@ export class AdminComponent implements OnInit {
         this.router.navigate(['/adminDashboard']);
         // this.loading = false;
       } else {  
+        localStorage.setItem('currentUser', null)
+        this.loginForm.reset();
         Swal.fire({
           title: 'Inavlid!',
           text: 'Invalid Login Credentials',

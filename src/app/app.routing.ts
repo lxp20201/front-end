@@ -21,11 +21,11 @@ const routes: Routes = [
     { path: 'CMSForgetPassword', component: ForgetPasswordComponent },
     { path: 'CMSconfirmPassword', component: ConfirmPasswordComponent },
     { path: 'LMSconfirmPassword', component: ConfirmPasswordComponent },
-    { path: '', component: HomeComponent  },
-    { path : 'dummy', component: DummyComponent},
-    { path : 'CmsHome', component: CmsHomeComponent},
-    { path : 'admin', component: AdminComponent},
-    { path : 'adminDashboard', component: AdminhomeComponent},
+    { path: '', component: HomeComponent },
+    { path: 'dummy', component: DummyComponent },
+    { path: 'CmsHome', component: CmsHomeComponent },
+    { path: 'admin', component: AdminComponent },
+    { path: 'adminDashboard', component: AdminhomeComponent, canActivate: [AuthGuard] },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
