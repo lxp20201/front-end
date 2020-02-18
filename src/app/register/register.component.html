@@ -82,12 +82,10 @@
         <button class="btn btn-primary login" (click)="onSubmit()">
             <span *ngIf="loading" (click)="onSubmit()" class="spinner-border spinner-border-sm mr-1"></span>
             Sign Up
-        </button>
+        </button> <br> <br>
         <h4 *ngIf="(platform == 'LMS') || (platform == 'CMS')">Already have an account ?
             <a routerLink="/LMSlogin" *ngIf="platform == 'LMS'" class="btn-link">Login</a>
             <a routerLink="/CMSlogin" *ngIf="platform == 'CMS'" class="btn-link">Login</a>
         </h4>
-    </form>
-    <br>
-    <br>
+    </form> <br> <br> <br> <br>
 </div>

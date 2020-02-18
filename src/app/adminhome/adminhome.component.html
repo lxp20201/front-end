@@ -1,65 +1,54 @@
+<div class="head">LMS User</div>
+<div class="card card-5">
+  <div class="row content">
 
-
-
-<div class="learnImg">
-
-  <span class="head">LMS User</span>
-   <div class="card card-5">
-    <div class="row content">
-
-    <div class="col-sm-11 text-left">             
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Mobile</th>
-        <th>Email</th>
-        <th>Is active</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-      </tr>
-     
-    </tbody>
-  </table>
-</div>
-
- 
+    <div class="col-sm-11 text-left">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Is active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let lms of lmsUsers">
+            <td text-wrap> {{lms.username}} {{lms.name }}</td>
+            <td>{{lms.mobile}}</td>
+            <td>{{lms.email}}</td>
+            <td>{{lms.is_active}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+<br><br><br>
+<div class="head">CMS User</div>
+<div class="card card-5">
+  <div class="row content">
 
-<span class="head">CMS User</span>
-   <div class="card card-5">
-    <div class="row content">
+    <div class="col-sm-11 text-left">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Is active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let cms of cmsUsers">
+            <td text-wrap> {{cms.username}} {{cms.name }}</td>
+            <td>{{cms.mobile}}</td>
+            <td>{{cms.email}}</td>
+            <td>{{cms.is_active}}</td>
+          </tr>
 
-    <div class="col-sm-11 text-left">             
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Mobile</th>
-        <th>Email</th>
-        <th>Is active</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-      </tr>
-     
-    </tbody>
-  </table>
-</div>
-
- 
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 </div>

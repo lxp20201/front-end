@@ -3,6 +3,10 @@
     border-radius: 0;
 }
 
+.jumbotron {
+    padding: 14vh 0px !important;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
     height: 450px
@@ -40,24 +44,25 @@
 .card-5 {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-.head{
+
+.head {
+    width: 100%;
     font-size: 22px;
     font-weight: 700;
-    margin-top: 40%;
-    margin-left: 11%;
-    color: darkgray;
-    padding: 12vh 0px 0px 0px !important;
+    color: #5e5b5b;
+    background: azure;
+    text-align: center;
+    padding: 10px;
 }
+
 .card {
     background: #fff;
     border-radius: 2px;
     display: inline-block;
-    height: 14%;
     margin: 1rem;
-    margin-left: 1rem;
     position: relative;
     width: 80%;
-    margin-left: 11%;
+    margin-left: 10%;
 }
 
 a {
@@ -66,15 +71,43 @@ a {
     background-color: transparent;
 }
 
-
-
 .navbar-inverse .navbar-nav>.active>a,
 .navbar-inverse .navbar-nav>.active>a:focus,
 .navbar-inverse .navbar-nav>.active>a:hover {
-    color:#fff;
-    background-color:#08080800;
+    color: #fff;
+    background-color: #08080800;
 }
-.h1{
+
+.h1 {
     font-size: 18px !important;
     float: start !important;
+}
+
+.row,
+.row.content[_ngcontent-utj-c0],
+.row.content[_ngcontent-vtj-c0] {
+    height: auto !important;
+}
+
+.table>thead>tr>th {
+    font-size: 15px;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    font-size: 14px;
+}
+
+.col-sm-11 {
+    flex: 0% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+thead {
+    background-color: aliceblue;
 }

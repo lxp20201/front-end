@@ -25,7 +25,7 @@ const routes: Routes = [
     { path : 'dummy', component: DummyComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
     { path : 'admin', component: AdminComponent},
-    { path : 'dashboard', component: AdminhomeComponent},
+    { path : 'adminDashboard', component: AdminhomeComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
