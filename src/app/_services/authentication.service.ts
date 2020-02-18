@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { login, signin } from '../operations/mutation';
+import { login, signin,admin_dashboard } from '../operations/mutation';
 
 import { environment } from '@environments/environment';
 
@@ -49,6 +49,17 @@ export class AuthenticationService {
           organization: organization,
           mobile: mobile,
           confirmpassword: confirmpassword,
+          is_staff: is_staff
+        }
+      });
+  }
+
+  admin_dashboard(is_staff) {
+    console.log(is_staff)
+    return this.Apollo
+      .mutate({
+        mutation: admin_dashboard,
+        variables: {         
           is_staff: is_staff
         }
       });

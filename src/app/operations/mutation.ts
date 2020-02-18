@@ -56,3 +56,22 @@ mutation verifymail($email:String,$id:String){
     }    
   }
 }`;
+
+export const admin_dashboard = gql`
+mutation admin_dashboard($is_staff:Boolean){
+  admin_dashboard(is_staff:$is_staff) {
+    success
+    message {
+      _id   
+      username   
+      name   
+      honor_code
+      terms_of_service  
+      email   
+      mobile    
+      is_staff    
+      is_active    
+      is_superuser
+    }   
+  }
+}`;
