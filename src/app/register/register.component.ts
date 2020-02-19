@@ -67,13 +67,17 @@ export class RegisterComponent implements OnInit {
                 localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
                 var u = localStorage.getItem('userDetails');
                 this.userDetails = JSON.parse(u);
-                this.userService.verifyemail(this.userDetails.email, this.userDetails._id,this.registerForm.value.username + this.registerForm.value.name).pipe(first()).subscribe(
-                    data1 => {
-                        if (data1.data['verifyemail']['data'].success === false) {
+                this.userService.verifyemail(this.userDetails.email, this.userDetails._id,
+                    this.registerForm.value.username + this.registerForm.value.name).pipe(first()).subscribe((data1: any) => {
+                        if (data1.data.verifymail.data.success === false) {
                             this.registerForm.reset()
-                            Swal.fire(data1.data['verifyemail']['data'].message)
-                        } else
+                            this.loading = false
+                            Swal.fire(data1.data.verifymail.data.success.message)
+                        } else {
+                            this.loading = false;
+                            this.router.navigate(['/login']);
                             Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
+                        }
                     })
             } else {
                 this.loading = false
