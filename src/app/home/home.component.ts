@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
                             data => {
                                 if (data.data['checklinkstatus'].success === true) {
                                     console.log(data)
-                                    this.router.navigate(['/CMSconfirmPassword', {email: email }]);
+                                    this.router.navigate(['/confirmPassword', {email: email }]);
                                 } else {
                                     console.log(data)
                                     localStorage.setItem('currentUser', null)
