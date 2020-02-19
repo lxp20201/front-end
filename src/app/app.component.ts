@@ -36,41 +36,57 @@ export class AppComponent {
                 e.routerEvent && e.routerEvent.url === '/LMSregister'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSlogin' || e.snapshot && e.snapshot._routerState.url === '/LMSlogin' ||
                 e.routerEvent && e.routerEvent.url === '/LMSlogin'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSregister' || e.snapshot && e.snapshot._routerState.url === '/CMSregister' ||
                 e.routerEvent && e.routerEvent.url === '/CMSregister'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSlogin' || e.snapshot && e.snapshot._routerState.url === '/CMSlogin' ||
                 e.routerEvent && e.routerEvent.url === '/CMSlogin'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSForgetPassword' ||
                 e.routerEvent && e.routerEvent.url === '/LMSForgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSForgetPassword' ||
                 e.routerEvent && e.routerEvent.url === '/CMSForgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSconfirmPassword' ||
                 e.routerEvent && e.routerEvent.url === '/LMSconfirmPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSconfirmPassword' ||
                 e.routerEvent && e.routerEvent.url === '/CMSconfirmPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CmsHome' || e.snapshot && e.snapshot._routerState.url === '/CmsHome' ||
                 e.routerEvent && e.routerEvent.url === '/CmsHome'))) {
