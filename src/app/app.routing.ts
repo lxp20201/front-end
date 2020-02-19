@@ -26,7 +26,7 @@ const routes: Routes = [
     { path : 'dummy', component: DummyComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
     { path : 'admin', component: AdminComponent},
-    { path : 'adminDashboard', component: AdminhomeComponent},
+    { path : 'adminDashboard', component: AdminhomeComponent,canActivate: [AuthGuard] },
     { path : 'courseCreation', component: CourseCreationComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

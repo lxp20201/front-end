@@ -1,6 +1,6 @@
-<!-- <app-header [userActive]="activeUser" [showHeader]="showHeader" [platform]="platform"></app-header> -->
+<!-- <app-header [userActive]="currentUser" [showHeader]="showHeader" [platform]="platform"></app-header> -->
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="activeUser && showHeader">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser != 'null'  && showHeader">
   <div class="navbar-nav header-logo">
     <img class="logoImgHeader" src="assets/logo.png" a routerLink="/">
   </div>
@@ -10,7 +10,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'LMS'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'null' && showHeader && platform == 'LMS'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png">
   </div>
@@ -20,7 +20,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!activeUser && showHeader && platform == 'CMS'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'null'  && showHeader && platform == 'CMS'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png">
   </div>
@@ -30,7 +30,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="activeUser && showHeader && platform == 'Admin'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser != 'null'  && showHeader && platform == 'Admin'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png" >
   </div>
