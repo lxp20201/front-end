@@ -48,8 +48,8 @@ mutation updateUser($email:String!,$_id:String!){
 }`;
 
 export const verifymail = gql`
-mutation verifymail($email:String,$id:String){
-  verifymail(email:$email, _id:$id) {
+mutation verifymail($email:String,$id:String,$name:String){
+  verifymail(email:$email, _id:$id,name : $name) {
     data{
       success
       message
@@ -73,5 +73,29 @@ mutation admin_dashboard($is_staff:Boolean){
       is_active    
       is_superuser
     }   
+  }
+}`;
+
+export const resetpassword = gql`
+mutation resetpassword($email:String,$name:String){
+  resetpassword(email:$email,name : $name) {
+      success
+      message
+  }
+}`;
+
+export const confirmpassword = gql`
+mutation confirmpassword($email:String,$password:String){
+  confirmpassword(email:$email,password : $password) {
+      success
+      message
+  }
+}`;
+
+export const checklinkstatus = gql`
+mutation checklinkstatus($email:String){
+  checklinkstatus(email:$email) {
+      success
+      message
   }
 }`;

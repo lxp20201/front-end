@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MustMatch } from '../_helpers/must-match.validator';
-import { AlertService } from '../_services';
-
+import { AlertService, AuthenticationService } from '../_services';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-confirm-password',
   templateUrl: './confirm-password.component.html',
@@ -11,7 +11,9 @@ import { AlertService } from '../_services';
 })
 export class ConfirmPasswordComponent implements OnInit {
   confirmPasswordForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router, private alertService: AlertService) { }
+  email: any;
+  constructor(private formBuilder: FormBuilder, private route: Router, private alertService: AlertService,
+    private authenticationService: AuthenticationService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.confirmPasswordForm = this.formBuilder.group({
@@ -20,14 +22,16 @@ export class ConfirmPasswordComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmpassword')
     });
+    this.email = this.router.snapshot.paramMap.get('email')
+    console.log('this.email',this.email)
   }
 
   get f() { return this.confirmPasswordForm.controls; }
 
   onSubmit() {
-    console.log('this.confirmPasswordForm',this.confirmPasswordForm)
     this.alertService.clear();
     if (this.confirmPasswordForm.valid) {
+      console.log(this.confirmPasswordForm.valid)
       this.post();
     } else {
       this.alertService.error('Please Enter Passwords Correctly!');
@@ -36,9 +40,15 @@ export class ConfirmPasswordComponent implements OnInit {
   }
 
   post() {
-    //payload goes here
-    var payload = new FormData();
-    payload.append('password', this.confirmPasswordForm.value.password);
+    this.authenticationService.confirmPassword(this.email, this.confirmPasswordForm.value.password).subscribe((result) => {
+      console.log(result, 'result')
+      if (result.data['confirmpassword'].success === true) {
+        this.route.navigate(['/home']);
+        Swal.fire('Success!', 'Password has been updated', 'success');
+      } else {
+        Swal.fire('Failed!', result.data['confirmpassword'].message, 'error');
+      }
+    })
   }
 
 }

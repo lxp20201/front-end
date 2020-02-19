@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first } from 'rxjs/operators';
 import { AuthenticationService, AlertService } from '../_services'
 import { AppComponent } from '../app.component';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
@@ -39,6 +39,15 @@ export class ForgetPasswordComponent implements OnInit {
   get f() { return this.ForgetPasswordForm.controls; }
 
   onSubmit() {
-
+    console.log('this.ForgetPasswordForm.value.email', this.ForgetPasswordForm.value.email)
+    var name = this.ForgetPasswordForm.value.email.lastIndexOf("@");
+    this.authenticationService.forgetPassword(this.ForgetPasswordForm.value.email, name).subscribe((result) => {
+      if (result.data['resetpassword'].success === true) {
+        this.router.navigate(['/home']);
+        Swal.fire('Success!','A mail has been sent to your account','success');
+      } else {
+        Swal.fire('Failed!',result.data['resetpassword'].message,'error');
+      }
+    })
   }
 }

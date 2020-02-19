@@ -61,18 +61,19 @@ export class RegisterComponent implements OnInit {
         ).pipe(first()).subscribe(data => {
             if (data.data['signin']['data'].success === true) {
                 this.registerForm.reset()
-                Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
+
                 // this.router.navigate(['/'], { queryParams: { registered: true } });
                 localStorage.setItem('csrfToken', JSON.stringify(data.data['signin']['data'].csrftoken));
                 localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
                 var u = localStorage.getItem('userDetails');
                 this.userDetails = JSON.parse(u);
-                this.userService.verifyemail(this.userDetails.email, this.userDetails._id).pipe(first()).subscribe(
+                this.userService.verifyemail(this.userDetails.email, this.userDetails._id,this.registerForm.value.username + this.registerForm.value.name).pipe(first()).subscribe(
                     data1 => {
                         if (data1.data['verifyemail']['data'].success === false) {
                             this.registerForm.reset()
                             Swal.fire(data1.data['verifyemail']['data'].message)
-                        }
+                        } else
+                            Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
                     })
             } else {
                 this.loading = false

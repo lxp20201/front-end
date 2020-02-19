@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { login, signin,admin_dashboard } from '../operations/mutation';
+import { login, signin, admin_dashboard, resetpassword, confirmpassword, checklinkstatus } from '../operations/mutation';
 
 import { environment } from '@environments/environment';
 
@@ -58,15 +58,47 @@ export class AuthenticationService {
     return this.Apollo
       .mutate({
         mutation: admin_dashboard,
-        variables: {         
+        variables: {
           is_staff: is_staff
         }
       });
   }
 
   logout() {
-    // remove user from local storage and set current user to null
+    // remove user from local storage and set current user to null - confirmpassword
     localStorage.clear();
     this.currentUserSubject.next(null);
+  }
+
+  forgetPassword(email, name) {
+    return this.Apollo
+      .mutate({
+        mutation: resetpassword,
+        variables: {
+          email: email,
+          name: name
+        }
+      });
+  }
+
+  confirmPassword(email, password) {
+    return this.Apollo
+      .mutate({
+        mutation: confirmpassword,
+        variables: {
+          email: email,
+          password: password
+        }
+      });
+  }
+
+  checklinkstatus(email) {
+    return this.Apollo
+      .mutate({
+        mutation: checklinkstatus,
+        variables: {
+          email: email
+        }
+      });
   }
 }
