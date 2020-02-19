@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit {
         localStorage.setItem('currentUser', null)
         this.loginForm.reset();
         Swal.fire({
-          title: 'Inavlid!',
+          title: 'Invalid!',
           text: 'Invalid Login Credentials',
           icon: 'error',
           confirmButtonText: 'OK'
