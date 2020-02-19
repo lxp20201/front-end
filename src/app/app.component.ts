@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthenticationService } from './_services';
+import { type } from 'os';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
     currentUser: any;
-    activeUser: boolean;
     showHeader: boolean;
     platform: any;
 
@@ -15,60 +15,78 @@ export class AppComponent {
     }
     logout() {
         // this.authenticationService.logout();
-        this.activeUser = false;
-        localStorage.setItem('currentUser', null)
+        this.currentUser = null;
+        localStorage.clear();
+        localStorage.setItem('currentUser', null);
+        console.log(this.currentUser, typeof this.currentUser)
         if (this.platform == 'LMS')
-            this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: false } });
+            this.router.navigate(['/LMSlogin'], { queryParams: { currentUser: null } });
         else if (this.platform == 'Admin')
-            this.router.navigate(['/admin'], { queryParams: { currentUser: false } });
+            this.router.navigate(['/admin'], { queryParams: { currentUser: null } });
         else
-            this.router.navigate(['/CMSlogin'], { queryParams: { currentUser: false } });
+            this.router.navigate(['/CMSlogin'], { queryParams: { currentUser: null } });
     }
     ngOnInit() {
         this.platform = null
         this.router.events.subscribe((e: any) => {
             // console.log(e)
             this.currentUser = localStorage.getItem('currentUser');
-            this.activeUser = this.currentUser ? true : false;
+            console.log(this.currentUser,typeof this.currentUser)
             if ((e && (e.url === '/LMSregister' || e.snapshot && e.snapshot._routerState.url === '/LMSregister' ||
                 e.routerEvent && e.routerEvent.url === '/LMSregister'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSlogin' || e.snapshot && e.snapshot._routerState.url === '/LMSlogin' ||
                 e.routerEvent && e.routerEvent.url === '/LMSlogin'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSregister' || e.snapshot && e.snapshot._routerState.url === '/CMSregister' ||
                 e.routerEvent && e.routerEvent.url === '/CMSregister'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSlogin' || e.snapshot && e.snapshot._routerState.url === '/CMSlogin' ||
                 e.routerEvent && e.routerEvent.url === '/CMSlogin'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSForgetPassword' ||
                 e.routerEvent && e.routerEvent.url === '/LMSForgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSForgetPassword' ||
                 e.routerEvent && e.routerEvent.url === '/CMSForgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/LMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSconfirmPassword' ||
                 e.routerEvent && e.routerEvent.url === '/LMSconfirmPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSconfirmPassword' ||
                 e.routerEvent && e.routerEvent.url === '/CMSconfirmPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/CmsHome' || e.snapshot && e.snapshot._routerState.url === '/CmsHome' ||
                 e.routerEvent && e.routerEvent.url === '/CmsHome'))) {
@@ -87,9 +105,10 @@ export class AppComponent {
             }
             else if ((e && (e.url === '/admin' || e.snapshot && e.snapshot._routerState.url === '/admin' ||
                 e.routerEvent && e.routerEvent.url === '/admin'))) {
-                this.activeUser = false
                 this.showHeader = false;
                 this.platform = 'Admin';
+                this.currentUser = null;
+                localStorage.setItem('currentUser', null);
             }
             else if ((e && (e.url === '/dummy' || e.snapshot && e.snapshot._routerState.url === '/dummy' ||
                 e.routerEvent && e.routerEvent.url === '/dummy')))

@@ -8,7 +8,6 @@ export class HomeComponent implements OnInit {
 
     currentUser: any;
     users = [];
-    activeUser: boolean;
     email: string;
     userDetails: any = [];
     constructor(
