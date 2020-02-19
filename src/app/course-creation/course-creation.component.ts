@@ -34,11 +34,18 @@ export class CourseCreationComponent implements OnInit {
       course_image: new FormControl('', [Validators.required]),
       course_docs: new FormControl('', [Validators.required]),
       course_video: new FormControl('', [Validators.required]),
+      organization_name: new FormControl('', [Validators.required]),
+      course_number: new FormControl('', [Validators.required]),
+      course_run: new FormControl('', [Validators.required]),
     });
 
   }
 
    // convenience getter for easy access to form fields///---/^[6-9]\d{9}\1*$/-------\\1{5}
    get f() { return this.CourseCreationForm.controls; }
+
+   reset(){
+     this.CourseCreationForm.reset()
+   }
 
 }

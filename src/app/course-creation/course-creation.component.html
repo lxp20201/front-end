@@ -1,3 +1,4 @@
+<div class="paddingTop"></div>
 <div class="column2">
   <p class=courseheading>Add New Course</p>
   <br><br>
@@ -10,12 +11,18 @@
       </div>
     </div>
     <div class="form-group">
+      <div class="textsize">*Note: Course Name Should be unique and display name of your course</div>
+    </div>
+    <div class="form-group">
       <input type="text" name="course_description" formControlName="course_description"
         placeholder="Course Description *" class="form-control"
         [ngClass]="{ 'is-invalid': f.course_description.touched && (f.course_description.errors) }" />
       <div *ngIf="f.course_description.touched && f.course_description.errors" class="invalid-feedback">
         <div *ngIf="f.course_description.errors.required">Course description is required</div>
       </div>
+    </div>
+    <div class="form-group">
+      <div class="textsize">*Note: Course Description can about your course along with it's benifits</div>
     </div>
     <div class="form-group" class="imagefield">
       <input type="file" accept="image/*" name="course_image" formControlName="course_image"
@@ -25,32 +32,86 @@
         <div *ngIf="f.course_image.errors.required">Atleast one image is required</div>
       </div>
     </div>
+    <br>
+    <div class="form-group">
+      <div class="textsize">*Note: Please select only image file, atleast one image must be uploaded </div>
+    </div>
     <div class="form-group" class="imagefield">
-      <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="course_docs" formControlName="course_docs" placeholder="Course Docs *"
-        class="form-control" [ngClass]="{ 'is-invalid': f.course_docs.touched && (f.course_docs.errors) }" />
+      <input type="file"
+        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        name="course_docs" formControlName="course_docs" placeholder="Course Docs *" class="form-control"
+        [ngClass]="{ 'is-invalid': f.course_docs.touched && (f.course_docs.errors) }" />
       <div *ngIf="f.course_docs.touched && f.course_docs.errors" class="invalid-feedback">
         <div *ngIf="f.course_docs.errors.required">Atleast one file is required</div>
       </div>
     </div>
+    <br>
+    <div class="form-group">
+      <div class="textsize">*Note: Please select only document, atleast one document to be uploaded</div>
+    </div>
     <div class="form-group" class="imagefield">
-      <input type="file" accept="video/*" name="course_video" formControlName="course_video" placeholder="Course Video *"
-        class="form-control" [ngClass]="{ 'is-invalid': f.course_video.touched && (f.course_video.errors) }" />
+      <input type="file" accept="video/*" name="course_video" formControlName="course_video"
+        placeholder="Course Video *" class="form-control"
+        [ngClass]="{ 'is-invalid': f.course_video.touched && (f.course_video.errors) }" />
       <div *ngIf="f.course_video.touched && f.course_video.errors" class="invalid-feedback">
         <div *ngIf="f.course_video.errors.required">Atleast one video file is required</div>
       </div>
     </div>
-        <br><br><br><br>
-        <div class="row">
-          <div class="column2">
-            <button class="coursebutton" (click)="onSubmit()">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Submit
-            </button>
-            <button class="coursebutton" (click)="reset()">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Reset
-            </button>
-          </div>
-        </div>
+    <br>
+    <div class="form-group">
+      <div class="textsize">
+        *Note: Please select only video file, atleast one video file has to be uploaded
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" name="organization_name" formControlName="organization_name" placeholder="organization name *"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': f.organization_name.touched && (f.organization_name.errors) }" />
+      <div *ngIf="f.organization_name.touched && f.organization_name.errors" class="invalid-feedback">
+        <div *ngIf="f.organization_name.errors.required">Organization Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="textsize">
+        *Note: The organization name is part of course URL and cannot be changed
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" name="course_number" formControlName="course_number" placeholder="course number *"
+        class="form-control" [ngClass]="{ 'is-invalid': f.course_number.touched && (f.course_number.errors) }" />
+      <div *ngIf="f.course_number.touched && f.course_number.errors" class="invalid-feedback">
+        <div *ngIf="f.course_number.errors.required">Course Number is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="textsize">
+        *Note: no spaces or special characters are allowed and it cannot be changed
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" name="course_run" formControlName="course_run" placeholder="course run *" class="form-control"
+        [ngClass]="{ 'is-invalid': f.course_run.touched && (f.course_run.errors) }" />
+      <div *ngIf="f.course_run.touched && f.course_run.errors" class="invalid-feedback">
+        <div *ngIf="f.course_run.errors.required">Course Run is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="textsize">
+        *Note: no spaces or special characters are allowed and it cannot be changed
+      </div>
+    </div>
+    <br><br><br><br>
+    <div class="row">
+      <div class="column2">
+        <button class="coursebutton" (click)="onSubmit()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Submit
+        </button>
+        <button class="coursebutton" (click)="reset()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Reset
+        </button>
+      </div>
+    </div>
   </form>
 </div>
