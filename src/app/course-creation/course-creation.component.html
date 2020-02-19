@@ -1,42 +1,42 @@
 <div class="column2">
   <p class=courseheading>Add New Course</p>
   <br><br>
-  <form [formGroup]="loginForm">
+  <form [formGroup]="CourseCreationForm">
     <div class="form-group">
-      <input type="text" name="course_name" formControlName="course_name" placeholder="Course name *"
+      <input type="text" name="course_name" formControlName="course_name" placeholder="Course Name *"
         class="form-control" [ngClass]="{ 'is-invalid': f.course_name.touched && (f.course_name.errors) }" />
       <div *ngIf="f.course_name.touched && f.course_name.errors" class="invalid-feedback">
-        <div *ngIf="f.course_name.errors.required">course name is required</div>
+        <div *ngIf="f.course_name.errors.required">Course name is required</div>
       </div>
     </div>
     <div class="form-group">
       <input type="text" name="course_description" formControlName="course_description"
-        placeholder="Course description *" class="form-control"
+        placeholder="Course Description *" class="form-control"
         [ngClass]="{ 'is-invalid': f.course_description.touched && (f.course_description.errors) }" />
       <div *ngIf="f.course_description.touched && f.course_description.errors" class="invalid-feedback">
-        <div *ngIf="f.course_description.errors.required">course description is required</div>
+        <div *ngIf="f.course_description.errors.required">Course description is required</div>
       </div>
     </div>
     <div class="form-group" class="imagefield">
       <input type="file" accept="image/*" name="course_image" formControlName="course_image"
-        placeholder="course image *" class="form-control"
+        placeholder="Course Image *" class="form-control"
         [ngClass]="{ 'is-invalid': f.course_image.touched && (f.course_image.errors) }" />
       <div *ngIf="f.course_image.touched && f.course_image.errors" class="invalid-feedback">
         <div *ngIf="f.course_image.errors.required">Atleast one image is required</div>
       </div>
     </div>
     <div class="form-group" class="imagefield">
-      <input type="file" accept="video" name="course_docs" formControlName="course_docs" placeholder="course docs *"
+      <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="course_docs" formControlName="course_docs" placeholder="Course Docs *"
         class="form-control" [ngClass]="{ 'is-invalid': f.course_docs.touched && (f.course_docs.errors) }" />
       <div *ngIf="f.course_docs.touched && f.course_docs.errors" class="invalid-feedback">
         <div *ngIf="f.course_docs.errors.required">Atleast one file is required</div>
       </div>
     </div>
     <div class="form-group" class="imagefield">
-      <input type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="course_docs" formControlName="course_docs" placeholder="course docs *"
-        class="form-control" [ngClass]="{ 'is-invalid': f.course_docs.touched && (f.course_docs.errors) }" />
-      <div *ngIf="f.course_docs.touched && f.course_docs.errors" class="invalid-feedback">
-        <div *ngIf="f.course_docs.errors.required">Atleast one video file is required</div>
+      <input type="file" accept="video/*" name="course_video" formControlName="course_video" placeholder="Course Video *"
+        class="form-control" [ngClass]="{ 'is-invalid': f.course_video.touched && (f.course_video.errors) }" />
+      <div *ngIf="f.course_video.touched && f.course_video.errors" class="invalid-feedback">
+        <div *ngIf="f.course_video.errors.required">Atleast one video file is required</div>
       </div>
     </div>
         <br><br><br><br>
