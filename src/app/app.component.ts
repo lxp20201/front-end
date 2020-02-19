@@ -60,29 +60,29 @@ export class AppComponent {
                 this.currentUser = null;
                 localStorage.setItem('currentUser', null);
             }
-            else if ((e && (e.url === '/LMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSForgetPassword' ||
-                e.routerEvent && e.routerEvent.url === '/LMSForgetPassword'))) {
+            else if ((e && (e.url === '/forgetPassword' || e.snapshot && e.snapshot._routerState.url === '/forgetPassword' ||
+                e.routerEvent && e.routerEvent.url === '/forgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
                 this.currentUser = null;
                 localStorage.setItem('currentUser', null);
             }
-            else if ((e && (e.url === '/CMSForgetPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSForgetPassword' ||
-                e.routerEvent && e.routerEvent.url === '/CMSForgetPassword'))) {
+            else if ((e && (e.url === '/forgetPassword' || e.snapshot && e.snapshot._routerState.url === '/forgetPassword' ||
+                e.routerEvent && e.routerEvent.url === '/forgetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
                 this.currentUser = null;
                 localStorage.setItem('currentUser', null);
             }
-            else if ((e && (e.url === '/LMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/LMSconfirmPassword' ||
-                e.routerEvent && e.routerEvent.url === '/LMSconfirmPassword'))) {
+            else if ((e && (e.url === '/resetPassword' || e.snapshot && e.snapshot._routerState.url === '/resetPassword' ||
+                e.routerEvent && e.routerEvent.url === '/resetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'LMS';
                 this.currentUser = null;
                 localStorage.setItem('currentUser', null);
             }
-            else if ((e && (e.url === '/CMSconfirmPassword' || e.snapshot && e.snapshot._routerState.url === '/CMSconfirmPassword' ||
-                e.routerEvent && e.routerEvent.url === '/CMSconfirmPassword'))) {
+            else if ((e && (e.url === '/resetPassword' || e.snapshot && e.snapshot._routerState.url === '/resetPassword' ||
+                e.routerEvent && e.routerEvent.url === '/resetPassword'))) {
                 this.showHeader = false;
                 this.platform = 'CMS';
                 this.currentUser = null;

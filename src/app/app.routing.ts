@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'CMSlogin', component: LoginComponent },
     { path: 'CMSregister', component: RegisterComponent },
     { path: 'forgetPassword', component: ForgetPasswordComponent },
-    { path: 'confirmPassword', component: ConfirmPasswordComponent },
+    { path: 'resetPassword', component: ConfirmPasswordComponent },
     { path: '', component: HomeComponent  },
     { path : 'dummy', component: DummyComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
