@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { login, signin, admin_dashboard, resetpassword, confirmpassword, checklinkstatus } from '../operations/mutation';
+import { login, signin, admin_dashboard, resetpassword, confirmpassword, checklinkstatus,courseView } from '../operations/mutation';
 
 import { environment } from '@environments/environment';
 
@@ -99,6 +99,16 @@ export class AuthenticationService {
         mutation: checklinkstatus,
         variables: {
           email: email
+        }
+      });
+  }
+  courseView(user_id) {
+    console.log(user_id,'coming in service file')
+    return this.Apollo
+      .query({
+        query: courseView,
+        variables: {
+          user_id: user_id
         }
       });
   }

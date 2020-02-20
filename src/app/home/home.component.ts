@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
-
+    allCourses:any;
     currentUser: any;
     users = [];
     email: string;
@@ -106,11 +106,22 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.viewAllCourses()
         this.loadAllCourses()
         this.email = this.route.snapshot.paramMap.get('email');
     }
 
     private loadAllCourses() {
 
+    }
+    viewAllCourses() {
+
+        var userid=localStorage.getItem('user_detail',)
+        this.authenticationService.courseView('5e4a55ef8d7a8e19fc65fd9e').subscribe((result) => {
+          console.log(result,'llllllllllllllllllllllllllllllllllllll')
+          if(result){
+              this.allCourses=result.data
+          }
+        });
     }
 }
