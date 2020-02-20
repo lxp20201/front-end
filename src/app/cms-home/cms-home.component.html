@@ -1,7 +1,7 @@
 <!-- <div class="paddingTop"></div> -->
 <div>
     <p class="learning cmsHome colorGold">Deliver Inspiring <br>Learning Experiences<br>
-        <button class="createCourse" routerLink="/courseCreation">
+        <button *ngIf = "currentUser == 'true'" class="createCourse" routerLink="/courseCreation">
             Create course
           </button></p>
    

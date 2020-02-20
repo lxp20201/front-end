@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cms-home.component.less']
 })
 export class CmsHomeComponent implements OnInit {
+  currentUser: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.currentUser = localStorage.getItem('currentUserCMS')
   }
 
 }
