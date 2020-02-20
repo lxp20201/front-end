@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
-import { login, signin, admin_dashboard, resetpassword, confirmpassword, checklinkstatus,courseView } from '../operations/mutation';
+import { courseView} from '../operations/query';
+import { login, signin, admin_dashboard, resetpassword, confirmpassword, checklinkstatus ,coursecreation} from '../operations/mutation';
 
 import { environment } from '@environments/environment';
 
@@ -70,14 +71,14 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
-  forgetPassword(email, name,is_staff) {
+  forgetPassword(email, name, is_staff) {
     return this.Apollo
       .mutate({
         mutation: resetpassword,
         variables: {
           email: email,
           name: name,
-          is_staff : is_staff
+          is_staff: is_staff
         }
       });
   }
@@ -103,12 +104,32 @@ export class AuthenticationService {
       });
   }
   courseView(user_id) {
-    console.log(user_id,'coming in service file')
+    console.log(user_id, 'coming in service file')
     return this.Apollo
       .query({
         query: courseView,
         variables: {
           user_id: user_id
+        }
+      });
+  }
+
+  courseCreate(course_name, course_description, user_id, course_image, course_video, course_docs,
+    org,number,run) {
+    console.log(user_id, 'coming in service file')
+    return this.Apollo
+      .mutate({
+        mutation: coursecreation,
+        variables: {
+          user_id: user_id,
+          course_description: course_description,
+          course_name: course_name,
+          course_image: course_image,
+          course_video: course_video,
+          course_docs: course_docs,
+          org : org,
+          number :number,
+          run : run
         }
       });
   }
