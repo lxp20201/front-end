@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthenticationService, AlertService } from '../_services'
+import { AuthenticationService } from '../_services'
 import { AppComponent } from '../app.component';
 import Swal from 'sweetalert2'
 @Component({
@@ -18,10 +17,8 @@ export class ForgetPasswordComponent implements OnInit {
   returnUrl: string;
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService,
     public app: AppComponent
   ) { }
 
@@ -41,12 +38,12 @@ export class ForgetPasswordComponent implements OnInit {
   onSubmit() {
     console.log('this.ForgetPasswordForm.value.email', this.ForgetPasswordForm.value.email)
     var name = this.ForgetPasswordForm.value.email.lastIndexOf("@");
-    this.authenticationService.forgetPassword(this.ForgetPasswordForm.value.email, name).subscribe((result) => {
+    this.authenticationService.forgetPassword(this.ForgetPasswordForm.value.email, name, this.platform == 'CMS' ? true : false).subscribe((result) => {
       if (result.data['resetpassword'].success === true) {
         this.router.navigate(['/home']);
-        Swal.fire('Success!','A mail has been sent to your account','success');
+        Swal.fire('Success!', 'A mail has been sent to your account', 'success');
       } else {
-        Swal.fire('Failed!',result.data['resetpassword'].message,'error');
+        Swal.fire('Failed!', result.data['resetpassword'].message, 'error');
       }
     })
   }

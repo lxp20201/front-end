@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log('e', this.router.url)
+        console.log('this.router.url', this.router.url)
         if (this.router.url == '/LMSlogin') {
             this.platform = 'LMS'
             this.is_staff = false
@@ -52,11 +52,22 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email, this.is_staff).subscribe((result) => {
             if (result.data['login'].data.success === true) {
-                localStorage.setItem('currentUser', 'true')
-                this.router.navigate(['/home']);
+                console.log('inside login success',result.data['login'].data.message,this.platform)
+                if (this.platform == 'CMS') {
+                    localStorage.setItem('currentUserCMS', 'true')
+                    this.router.navigate(['/CmsHome']);
+                }
+                else if (this.platform == 'LMS') {
+                    localStorage.setItem('currentUserLMS', 'true')
+                    this.router.navigate(['/home']);
+                }
                 this.loading = false;
             } else {
-                localStorage.setItem('currentUser', null)
+                console.log('inside login error',result.data['login'].data.message,this.platform)
+                if (this.platform == 'CMS')
+                    localStorage.setItem('currentUserCMS', null)
+                else if (this.platform == 'LMS')
+                    localStorage.setItem('currentUserLMS', null)
                 this.loading = false;
                 Swal.fire({
                     title: 'Failed!',

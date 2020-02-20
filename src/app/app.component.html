@@ -1,6 +1,6 @@
 <!-- <app-header [userActive]="currentUser" [showHeader]="showHeader" [platform]="platform"></app-header> -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'true' && showHeader && platform == 'LMS'">
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser != 'null'  && showHeader">
   <div class="navbar-nav header-logo">
     <img class="logoImgHeader" src="assets/logo.png" a routerLink="/">
   </div>
@@ -10,7 +10,17 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'null' && showHeader && platform == 'LMS'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'true' && showHeader && platform == 'CMS'">
+  <div class="navbar-nav header-logo">
+    <img class="logoImgHeader" src="assets/logo.png" a routerLink="/CmsHome">
+  </div>
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Home</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="(currentUser == 'null' || currentUser == 'undefined') && showHeader && platform == 'LMS'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png">
   </div>
@@ -20,7 +30,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'null'  && showHeader && platform == 'CMS'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="(currentUser == 'null' || currentUser == 'undefined')  && showHeader && platform == 'CMS'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png">
   </div>
@@ -30,7 +40,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser != 'null'  && showHeader && platform == 'Admin'">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser == 'true'  && showHeader && platform == 'Admin'">
   <div class="navbar-nav">
     <img class="logoImgHeader" src="assets/logo.png" >
   </div>
@@ -38,7 +48,7 @@
     <a class="nav-item nav-link" routerLink="/admin">Logout</a>
   </div>
 </nav>
-
+<br><br>
 <!-- main content container -->
 <div class="jumbotron">
   <div class="container">

@@ -70,13 +70,14 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 
-  forgetPassword(email, name) {
+  forgetPassword(email, name,is_staff) {
     return this.Apollo
       .mutate({
         mutation: resetpassword,
         variables: {
           email: email,
-          name: name
+          name: name,
+          is_staff : is_staff
         }
       });
   }

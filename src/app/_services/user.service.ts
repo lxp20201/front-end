@@ -26,14 +26,15 @@ export class UserService {
           });
       }
 
-      verifyemail(email,id,name) {
+      verifyemail(email,id,name,is_staff) {
         return this.Apollo
           .mutate({
             mutation:verifymail,
             variables: {
                 email:email,
                 _id:id,
-                name : name
+                name : name,
+                is_staff : is_staff
             }
           });
       }   

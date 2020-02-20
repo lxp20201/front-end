@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
     loading = false;
     userDetails: any;
     platform: string;
+    is_staff: boolean;
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
@@ -49,33 +50,37 @@ export class RegisterComponent implements OnInit {
         var honor_code = true
         var terms_of_service = true
         if (this.router.url === '/LMSregister') {
-            var is_staff = false;
+            this.is_staff = false;
         } else {
-            is_staff = true;
+            this.is_staff = true;
         }
         this.authenticationService.register(this.registerForm.value.email,
             this.registerForm.value.name, this.registerForm.value.username, honor_code,
             terms_of_service, this.registerForm.value.password, this.registerForm.value.organization,
-            this.registerForm.value.mobile, this.registerForm.value.confirmpassword, is_staff
+            this.registerForm.value.mobile, this.registerForm.value.confirmpassword, this.is_staff
 
         ).pipe(first()).subscribe(data => {
             if (data.data['signin']['data'].success === true) {
                 this.registerForm.reset()
-
-                // this.router.navigate(['/'], { queryParams: { registered: true } });
-                localStorage.setItem('csrfToken', JSON.stringify(data.data['signin']['data'].csrftoken));
-                localStorage.setItem('userDetails', JSON.stringify(data.data['signin']['data']['user_detail']));
-                var u = localStorage.getItem('userDetails');
+                localStorage.setItem(this.platform == 'LMS' ? 'userDetailsLMS' : 'userDetailsCMS', JSON.stringify(data.data['signin']['data']['user_detail']));
+                localStorage.setItem(this.platform == 'LMS' ? 'csrfTokenLMS' : 'csrfTokenCMS', JSON.stringify(data.data['signin']['data'].csrftoken));
+                var u = localStorage.getItem(this.platform == 'LMS' ? 'userDetailsLMS' : 'userDetailsCMS');
                 this.userDetails = JSON.parse(u);
+                console.log(this.userDetails,this.userDetails.username + this.userDetails.name)
                 this.userService.verifyemail(this.userDetails.email, this.userDetails._id,
-                    this.registerForm.value.username + this.registerForm.value.name).pipe(first()).subscribe((data1: any) => {
+                    this.userDetails.username + ' '+ this.userDetails.name,this.userDetails.is_staff).pipe(first()).subscribe((data1: any) => {
                         if (data1.data.verifymail.data.success === false) {
+                            console.log('inside reg false :',this.platform ,this.userDetails)
                             this.registerForm.reset()
                             this.loading = false
-                            Swal.fire(data1.data.verifymail.data.success.message)
+                            Swal.fire(data1.data.verifymail.data.message)
                         } else {
+                            console.log('inside reg true :',this.platform ,this.userDetails)
                             this.loading = false;
-                            this.router.navigate(['/login']);
+                            if (this.platform == 'LMS')
+                                this.router.navigate(['/']);
+                            else if (this.platform == 'CMS')
+                                this.router.navigate(['/CmsHome']);
                             Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
                         }
                     })

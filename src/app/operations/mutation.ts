@@ -32,6 +32,7 @@ mutation signin(
         email
         _id
         name
+        is_staff
       }
   }
 }
@@ -48,8 +49,8 @@ mutation updateUser($email:String!,$_id:String!){
 }`;
 
 export const verifymail = gql`
-mutation verifymail($email:String,$id:String,$name:String){
-  verifymail(email:$email, _id:$id,name : $name) {
+mutation verifymail($email:String,$id:String,$name:String,$is_staff:Boolean){
+  verifymail(email:$email, _id:$id,name : $name, is_staff : $is_staff) {
     data{
       success
       message
@@ -77,8 +78,8 @@ mutation admin_dashboard($is_staff:Boolean){
 }`;
 
 export const resetpassword = gql`
-mutation resetpassword($email:String,$name:String){
-  resetpassword(email:$email,name : $name) {
+mutation resetpassword($email:String,$name:String,$is_staff: Boolean){
+  resetpassword(email:$email,name : $name,is_staff : $is_staff) {
       success
       message
   }
