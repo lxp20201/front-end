@@ -24,6 +24,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { AdminComponent } from './admin/admin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { CourseCreationComponent } from './course-creation/course-creation.component';
+import { CourseviewComponent } from './courseview/courseview.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -47,7 +48,8 @@ import { CourseCreationComponent } from './course-creation/course-creation.compo
         ForgetPasswordComponent,
         AdminComponent,
         AdminhomeComponent,
-        CourseCreationComponent
+        CourseCreationComponent,
+        CourseviewComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

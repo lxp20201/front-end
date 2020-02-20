@@ -11,7 +11,8 @@ import { ConfirmPasswordComponent } from './confirm-password';
 import { AdminComponent } from './admin/admin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { CourseCreationComponent } from './course-creation/course-creation.component';
-
+import {CourseviewComponent} from './courseview/courseview.component'
+import { from } from 'rxjs';
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'LMSlogin', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path : 'admin', component: AdminComponent},
     { path : 'adminDashboard', component: AdminhomeComponent,canActivate: [AuthGuard] },
     { path : 'courseCreation', component: CourseCreationComponent},
+    { path :'courseview',component:CourseviewComponent},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
