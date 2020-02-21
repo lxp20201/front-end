@@ -17,6 +17,8 @@ export class CmsHomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.viewAllCourses();
+    console.log('constructor .....................................')
     route.params.subscribe(val => {
       // put the code from `ngOnInit` here
       this.viewAllCourses();
