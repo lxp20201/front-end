@@ -81,11 +81,14 @@ export class CourseCreationComponent implements OnInit {
       .subscribe((result: any) => {
         console.log(result);
         if (result.data.coursecreation.success === true) {
+          this.CourseCreationForm.reset();
+          // this.router.navigate(['/CmsHome']);
           Swal.fire("Success!", "Course created successfully", "success");
         } else {
-          Swal.fire("Failed!", result.data.coursecreation.error.CourseErrMsg, "error");
-          Swal.fire("Failed!", result.data.coursecreation.error.OrgErrMsg, "error");
-          Swal.fire("Failed!", result.data.coursecreation.error.ErrMsg, "error");
+          this.CourseCreationForm.reset();
+          Swal.fire("Failed!", result.data.coursecreation.error.CourseErrMsg + result.data.coursecreation.error.OrgErrMsg +result.data.coursecreation.error.ErrMsg, "error");
+          // Swal.fire("Failed!", result.data.coursecreation.error.OrgErrMsg, "error");
+          // Swal.fire("Failed!", result.data.coursecreation.error.ErrMsg, "error");
         }
       });
   }

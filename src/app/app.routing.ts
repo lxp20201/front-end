@@ -15,7 +15,7 @@ import {CourseviewComponent} from './courseview/courseview.component'
 import { from } from 'rxjs';
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'LMSlogin', component: LoginComponent },
+    { path: 'LMSlogin', component: LoginComponent, },
     { path: 'LMSregister', component: RegisterComponent },
     { path: 'CMSlogin', component: LoginComponent },
     { path: 'CMSregister', component: RegisterComponent },
@@ -25,11 +25,12 @@ const routes: Routes = [
     { path: 'CMSResetPassword', component: ConfirmPasswordComponent },
     { path: '', component: HomeComponent  },
     { path : 'dummy', component: DummyComponent},
+    { path : 'CMS', component: CmsHomeComponent},
     { path : 'CmsHome', component: CmsHomeComponent},
     { path : 'admin', component: AdminComponent},
     { path : 'adminDashboard', component: AdminhomeComponent,canActivate: [AuthGuard] },
-    { path : 'courseCreation', component: CourseCreationComponent},
-    { path :'courseview',component:CourseviewComponent},
+    { path : 'courseCreation', component: CourseCreationComponent,canActivate: [AuthGuard]},
+    { path :'courseview',component:CourseviewComponent,canActivate: [AuthGuard]},
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

@@ -9,6 +9,53 @@
     <img class="learnImg" src="../../assets/bulb.jpg">
 </div>
 <br>
-<!-- <div class="exploreBar">
-    Explore our Programs
-</div> -->
+<div *ngIf = "currentUser == 'true'" >
+    <div class="exploreBar">
+        My Programs
+    </div>
+    <br>
+    <div class="rowforGrid">
+        <div class="columnforGrid" *ngFor = "let c of allCourses" (click) = "gotoCourse(c._id)">
+            <div class="ex1">
+                <div class="ex2">
+                    <div class="eximg">
+                        <img class="eximg" src="../../assets/course.jpg">
+                    </div>
+                    <div class="exp">
+                        <div class="soon">{{c.display_name}}</div>
+                    </div>
+                    <div class="crc_det">Organizaiton: {{c.org}}</div>
+                    <div class="crc_det">Number : {{c.number}}</div>
+                    <div class="crc_det">Duration : {{c.run}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="columnforGrid">
+            <div class="ex1">
+                <div class="ex2">
+                    <div class="eximg">
+                        <img class="eximg" src="../../assets/course.jpg">
+                    </div>
+                    <div class="exp">
+                        <div class="soon">Coming Soon...</div>
+                    </div>
+                    <div class="soon">Coming Soon...</div>
+                </div>
+            </div>
+        </div>
+        <div class="columnforGrid">
+            <div class="ex1">
+                <div class="ex2">
+                    <div class="eximg">
+                        <img class="eximg" src="../../assets/course.jpg">
+                    </div>
+                    <div class="exp">
+                        <div class="soon">Coming Soon...</div>
+                    </div>
+                    <div class="soon">Coming Soon...</div>
+                </div>
+            </div>
+        </div> -->
+    
+    </div>
+</div>

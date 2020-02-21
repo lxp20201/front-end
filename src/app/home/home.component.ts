@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
                                         localStorage.setItem('currentUserLMS', 'true');
                                         this.router.navigate(['/home']);
                                     }
+                                                                      
                                 } else {
                                     console.log('inside verifying process false: ', data.data['updateUser'])
                                     this.router.navigate(['/dummy'])

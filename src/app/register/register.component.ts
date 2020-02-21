@@ -81,7 +81,7 @@ export class RegisterComponent implements OnInit {
                                 this.router.navigate(['/']);
                             else if (this.platform == 'CMS')
                                 this.router.navigate(['/CmsHome']);
-                            Swal.fire('Registration successful', 'A mail has been sent to your account. Please Verify to login', "success");
+                                Swal.fire('Registration Successful', 'Verification link has been sent to your mail account. Please verify to login', 'success');
                         }
                     })
             } else {
