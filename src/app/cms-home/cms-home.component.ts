@@ -17,11 +17,13 @@ export class CmsHomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.ngOnInit();
-      }
+    route.params.subscribe(val => {
+      // put the code from `ngOnInit` here
+      this.viewAllCourses();
     });
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+  };
   }
 
   ngOnInit() {
