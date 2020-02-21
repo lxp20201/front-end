@@ -13,8 +13,10 @@ export class ConfirmPasswordComponent implements OnInit {
   confirmPasswordForm: FormGroup;
   email: any;
   constructor(private formBuilder: FormBuilder, private route: Router, private alertService: AlertService,
-    private authenticationService: AuthenticationService, private router: ActivatedRoute) { }
+    private authenticationService: AuthenticationService, private router: ActivatedRoute) {
+       }
 
+     
   ngOnInit() {
     this.confirmPasswordForm = this.formBuilder.group({
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)]),

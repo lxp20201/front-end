@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../_services";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: "app-cms-home",
@@ -14,11 +14,14 @@ export class CmsHomeComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.currentUser = localStorage.getItem("currentUserCMS");
-    console.log(this.currentUser)
-    this.viewAllCourses();
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
   }
 
   ngOnInit() {
@@ -28,25 +31,22 @@ export class CmsHomeComponent implements OnInit {
 
   viewAllCourses() {
     var u = localStorage.getItem("userDetailsCMS");
-    if(u) {
+    if (u) {
       this.userDetails = JSON.parse(u);
-      console.log(u);
       this.authenticationService
         .courseView(this.userDetails._id)
         .subscribe(result => {
-          console.log(result, "llllllllllllllllllllllllllllllllllllll");
           if (result.data["getcourse"].success === true) {
             this.allCourses = result.data["getcourse"].message;
             console.log("this.allCourses", this.allCourses);
           }
         });
     }
-
   }
 
   gotoCourse(id) {
-    localStorage.setItem('courseID',id)
-    console.log(id)
+    localStorage.setItem("courseID", id);
+    console.log(id);
     this.router.navigate(["/courseview"]);
   }
 }
