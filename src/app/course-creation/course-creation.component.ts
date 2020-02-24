@@ -52,14 +52,14 @@ export class CourseCreationComponent implements OnInit {
   onSubmit() {
     var user = localStorage.getItem("userDetailsCMS");
     var detail = JSON.parse(user);
-    console.log(
-      this.CourseCreationForm.value.course_name,
-      this.CourseCreationForm.value.course_description,
-      detail._id,
-      this.CourseCreationForm.value.course_image,
-      this.CourseCreationForm.value.course_video,
-      this.CourseCreationForm.value.course_docs
-    );
+    // console.log(
+    //   this.CourseCreationForm.value.course_name,
+    //   this.CourseCreationForm.value.course_description,
+    //   detail._id,
+    //   this.CourseCreationForm.value.course_image,
+    //   this.CourseCreationForm.value.course_video,
+    //   this.CourseCreationForm.value.course_docs
+    // );
     this.authenticationService
       .courseCreate(
         this.CourseCreationForm.value.course_name,
@@ -83,13 +83,14 @@ export class CourseCreationComponent implements OnInit {
         if (result.data.coursecreation.success === true) {
           this.CourseCreationForm.reset();
           this.router.navigate(["/CmsHome", { created: "course" }]);
+          // this.
           Swal.fire("Success!", "Course created successfully", "success");
         } else {
           this.CourseCreationForm.reset();
           Swal.fire(
             "Failed!",
-            result.data.coursecreation.error.CourseErrMsg +
-              result.data.coursecreation.error.OrgErrMsg +
+            result.data.coursecreation.error.CourseErrMsg + ' ' +
+              result.data.coursecreation.error.OrgErrMsg + ' ' +
               result.data.coursecreation.error.ErrMsg,
             "error"
           );

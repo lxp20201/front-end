@@ -17,15 +17,7 @@ export class CmsHomeComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.viewAllCourses();
-    console.log('constructor .....................................')
-    route.params.subscribe(val => {
-      // put the code from `ngOnInit` here
-      this.viewAllCourses();
-    });
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-  };
+    
   }
 
   ngOnInit() {
@@ -42,7 +34,6 @@ export class CmsHomeComponent implements OnInit {
         .subscribe(result => {
           if (result.data["getcourse"].success === true) {
             this.allCourses = result.data["getcourse"].message;
-            console.log("this.allCourses", this.allCourses);
           }
         });
     }
@@ -50,7 +41,6 @@ export class CmsHomeComponent implements OnInit {
 
   gotoCourse(id) {
     localStorage.setItem("courseID", id);
-    console.log(id);
     this.router.navigate(["/courseview"]);
   }
 }

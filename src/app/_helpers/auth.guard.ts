@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // const currentUser = this.authenticationService.currentUserValue;
-    console.log(state.url)
+    // console.log(state.url)
     if (state.url == "/home") {
       this.guard("currentUserLMS");
       const currentUser = localStorage.getItem("currentUserLMS");

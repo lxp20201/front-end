@@ -38,7 +38,6 @@ export const getUsers = gql`
   }
 `;
 
-
 export const getcourse = gql`
   query getcourse($user_id: String){
     getcourse(user_id: $user_id) {
@@ -59,11 +58,11 @@ export const getcourse = gql`
         course_image
       }
     }
-  }
-`;
+  }`;
+  
 export const getcoursebyid = gql`
-  query getcoursebyid($user_id: String,$_id: String){
-    getcoursebyid(user_id: $user_id,_id:$_id) {
+  query getcoursebyid($user_id: String, $_id: String) {
+    getcoursebyid(user_id: $user_id, _id: $_id) {
       success
       error
       message {

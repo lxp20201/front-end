@@ -116,8 +116,8 @@ export class AuthenticationService {
       }
     });
   }
+
   courseView(user_id) {
-    console.log(user_id, "coming in service file");
     return this.Apollo.query({
       query: getcourse,
       variables: {
@@ -137,7 +137,6 @@ export class AuthenticationService {
     number,
     run
   ) {
-    console.log(user_id, "coming in service file");
     return this.Apollo.mutate({
       mutation: coursecreation,
       variables: {
@@ -150,18 +149,17 @@ export class AuthenticationService {
         org: org,
         number: number,
         run: run
-      }
+      },
     });
   }
 
   getcoursebyid(user_id, id) {
-    console.log(user_id, "coming in service file");
     return this.Apollo.query({
       query: getcoursebyid,
       variables: {
         user_id: user_id,
         _id: id
-      }
+      }, 
     });
   }
 }
