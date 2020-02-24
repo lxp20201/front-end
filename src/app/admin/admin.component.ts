@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
       })
       return;
     }
-    this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email, true).subscribe((result: any) => {
+    this.authenticationService.login(this.loginForm.value.password, this.loginForm.value.email, true, true).subscribe((result: any) => {
       if (result.data.login.success == true) {
         localStorage.setItem('currentUser', 'true')
         this.router.navigate(['/adminDashboard']);

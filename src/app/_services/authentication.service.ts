@@ -32,14 +32,15 @@ export class AuthenticationService {
     return this.currentUserSubject.value || null;
   }
 
-  login(password, email, is_staff) {
+  login(password, email, is_staff, is_superuser) {
     return this.Apollo.mutate({
       mutation: login,
       variables: {
         password: password,
         email: email,
         remember: false,
-        is_staff: is_staff
+        is_staff: is_staff,
+        is_superuser : is_superuser
       }
     });
   }
