@@ -136,7 +136,8 @@ export class AuthenticationService {
     course_docs,
     org,
     number,
-    run
+    run,
+    course_content
   ) {
     return this.Apollo.mutate({
       mutation: coursecreation,
@@ -149,7 +150,8 @@ export class AuthenticationService {
         course_docs: course_docs,
         org: org,
         number: number,
-        run: run
+        run: run,
+        course_content : course_content
       },
     });
   }
