@@ -13,6 +13,37 @@
   </div>
 </div>
 
-<div class="modules-brief-description">
+<div class="modules-brief-description" id="coursediv">
   {{course.course_description}}
+  <br/>
+  <!-- <div id="sectiondiv" class="modules-brief sectionclass" ng-show = "IsVisible">
+    <div>
+      <input type="text" name="add_section" formControlName="add_section" placeholder="Add Section*" class="form-control"
+      />
+    </div>
+    <br/>
+    <section><button (click)="CreateNewSubSection()">New SubSection</button></section>
+    <br/>
+
+    <div id="subsectiondiv" class="modules-brief subsectionclass" ng-show = "IsVisible">
+      <div>
+        <input type="text" name="add_sub_section" formControlName="add_sub_section" placeholder="Add Sub Section*" class="form-control"
+        />
+      </div>
+      <br/>
+      <section><button (click)="CreateNewUnit()">New Unit</button></section>
+    </div>
+
+    <br/>
+
+</div> -->
+<footer><button (click)="CreateNewSection()">New Section</button></footer>
 </div>
+
+
+
+ <!-- <div class="add-section add-item">
+  <a href="#" class="button button-new" data-default-name="Section" title="Click to add a new Section">
+    <span class="icon fa fa-plus" aria-hidden="true"></span>New Section
+ </a>
+</div> -->
