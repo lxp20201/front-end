@@ -15,7 +15,7 @@
 
 <div class="modules-brief-description" id="coursediv">
   {{course.course_description}}
-  <br/>
+  <br /> <br />
   <!-- <div id="sectiondiv" class="modules-brief sectionclass" ng-show = "IsVisible">
     <div>
       <input type="text" name="add_section" formControlName="add_section" placeholder="Add Section*" class="form-control"
@@ -37,12 +37,13 @@
     <br/>
 
 </div> -->
-<footer><button (click)="CreateNewSection()">New Section</button></footer>
+  <div class="newSection"> <button class ="newSectionBtn" (click)="CreateNewSection()">New Section</button></div>
+
 </div>
 
 
 
- <!-- <div class="add-section add-item">
+<!-- <div class="add-section add-item">
   <a href="#" class="button button-new" data-default-name="Section" title="Click to add a new Section">
     <span class="icon fa fa-plus" aria-hidden="true"></span>New Section
  </a>
