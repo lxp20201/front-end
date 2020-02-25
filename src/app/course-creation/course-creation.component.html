@@ -14,7 +14,7 @@
     <div class="textsize">*Note: Course Name Should be unique and display name of your course</div>
     <!-- </div> -->
     <div class="form-group">
-      <textarea  rows="4" cols="50" type="text" name="course_description" formControlName="course_description"
+      <textarea  rows="3" cols="30" type="text" name="course_description" formControlName="course_description"
         placeholder="Course Description *" class="form-control"
         [ngClass]="{ 'is-invalid': f.course_description.touched && (f.course_description.errors) }"></textarea>
       <div *ngIf="f.course_description.touched && f.course_description.errors" class="invalid-feedback">
