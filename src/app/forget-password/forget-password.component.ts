@@ -47,7 +47,7 @@ export class ForgetPasswordComponent implements OnInit {
     if (this.ForgetPasswordForm.invalid) {
       Swal.fire({
         title: "Required!",
-        text: "Please fill emailID",
+        text: "Please enter your email",
         icon: "error",
         confirmButtonText: "OK"
       });

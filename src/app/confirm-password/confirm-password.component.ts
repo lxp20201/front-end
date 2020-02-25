@@ -24,7 +24,8 @@ export class ConfirmPasswordComponent implements OnInit {
     }, {
       validator: MustMatch('password', 'confirmpassword')
     });
-    this.email = this.router.snapshot.paramMap.get('email')
+    // this.email = this.router.snapshot.paramMap.get('email')
+    this.email = this.alertService.email;
     console.log('this.email',this.email)
   }
 

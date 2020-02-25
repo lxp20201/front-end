@@ -24,7 +24,6 @@ export class CourseCreationComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    console.log(this.router.url);
   }
 
   ngOnInit() {
@@ -50,6 +49,15 @@ export class CourseCreationComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.CourseCreationForm.invalid) {
+      Swal.fire({
+        title: "Required!",
+        text: "Please enter all required details",
+        icon: "error",
+        confirmButtonText: "OK"
+      });
+      return;
+    }
     var user = localStorage.getItem("userDetailsCMS");
     var detail = JSON.parse(user);
     // console.log(
@@ -79,10 +87,9 @@ export class CourseCreationComponent implements OnInit {
         this.CourseCreationForm.value.course_run
       )
       .subscribe((result: any) => {
-        console.log(result);
         if (result.data.coursecreation.success === true) {
           this.CourseCreationForm.reset();
-          this.router.navigate(["/CmsHome", { created: "course" }]);
+          this.router.navigate(["/CmsHome"]);
           // this.
           Swal.fire("Success!", "Course created successfully", "success");
         } else {

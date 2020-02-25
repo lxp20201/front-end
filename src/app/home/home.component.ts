@@ -73,12 +73,14 @@ export class HomeComponent implements OnInit {
                         .pipe(first())
                         .subscribe(
                             data => {
+                                this.alertService.email = email;
                                 if (data.data['checklinkstatus'].success === true) {
                                     console.log(data)
+                                    this.alertService.email = email;
                                     if ((params['is_staff']) == 'true') {
-                                        this.router.navigate(['/CMSResetPassword', { email: email }]);
+                                        this.router.navigate(['/CMSResetPassword']);
                                     } else {
-                                        this.router.navigate(['/LMSResetPassword', { email: email }]);
+                                        this.router.navigate(['/LMSResetPassword']);
                                     }
                                 } else {
                                     this.router.navigate(['/dummy'])
