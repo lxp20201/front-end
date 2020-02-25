@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.authenticationService
-      .login(this.loginForm.value.password,this.loginForm.value.email,this.is_staff)
+      .login(this.loginForm.value.password,this.loginForm.value.email,this.is_staff,false)
       .subscribe(result => {
         console.log(result)
         if (result.data["login"].success === true) {
