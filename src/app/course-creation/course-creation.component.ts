@@ -84,7 +84,8 @@ export class CourseCreationComponent implements OnInit {
         ],
         this.CourseCreationForm.value.organization_name,
         this.CourseCreationForm.value.course_number,
-        this.CourseCreationForm.value.course_run
+        this.CourseCreationForm.value.course_run,
+        this.CourseCreationForm.value.course_content
       )
       .subscribe((result: any) => {
         if (result.data.coursecreation.success === true) {
