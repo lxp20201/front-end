@@ -6,38 +6,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./dummy.component.less"]
 })
 export class DummyComponent implements OnInit {
+  fieldArray: Array<any> = [];
+  subfieldArray: Array<any> = [];
+  newAttribute: any = {};
+  newSubAttribute: any = {};
+  isEditItems: boolean;
+  isEditItemsSub:  Array<boolean> = [];
+
   constructor() {}
 
   ngOnInit() {}
-  name = "Angular 6";
 
-  fieldArray: Array<any> = [
-    {
-      name: "Default Name 1"
-    },
-    {
-      name: "Default Name 2"
-    }
-  ];
-  newAttribute: any = {};
-
-  firstField = true;
-  firstFieldName = "First Item name";
-  isEditItems: boolean;
-
-  // candidates: any[] = [
-  //   {
-  //     'name': 'Default Name',
-  //     'title': 'Job Title',
-  //   },
-  //   {
-  //     'name': 'Default Name 2',
-  //     'title': 'Job Title',
-  //   }
-  // ];
-
-  addFieldValue(index) {
-    if (this.fieldArray.length <= 5) {
+  addFieldValue() {
+    if (this.fieldArray.length <= 6) {
       this.fieldArray.push(this.newAttribute);
       this.newAttribute = {};
     } else {
@@ -49,6 +30,32 @@ export class DummyComponent implements OnInit {
   }
 
   onEditCloseItems() {
+    console.log(this.isEditItems,"isEditItems")
     this.isEditItems = !this.isEditItems;
+    console.log(this.isEditItems,"isEditItems")
+  }
+
+  onEditCloseSubItems(i) {
+    console.log(this.isEditItemsSub[i],"isEditItemsSub")
+    this.isEditItemsSub[i] = !this.isEditItemsSub[i];
+    console.log(this.isEditItemsSub[i],"isEditItemsSub")
+  }
+
+  addSubFieldValue(i) {
+    if (this.subfieldArray.length != 0 && this.subfieldArray[i] && this.subfieldArray[i].length <= 6) {
+      this.subfieldArray[i].push(this.newSubAttribute);
+      this.newSubAttribute = {};
+      console.log(this.subfieldArray[i], " this.subfieldArray"+i);
+    } else {
+      this.subfieldArray.push([])
+      this.subfieldArray[i].push(this.newSubAttribute);
+      this.newSubAttribute = {};
+      console.log(this.subfieldArray[i], " this.subfieldArray"+i);
+    }
+    console.log(this.subfieldArray)
+  }
+
+  deleteSubFieldValue(i,index) {
+    this.subfieldArray[i].splice(index, 1);
   }
 }

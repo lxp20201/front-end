@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { FormsModule } from '@angular/forms';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 import { GraphqlModule } from './graphql/graphql.module';
@@ -33,7 +33,8 @@ import { CourseviewComponent } from './courseview/courseview.component';
         appRoutingModule,
         ApolloModule,
         HttpLinkModule,
-        GraphqlModule
+        GraphqlModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,
