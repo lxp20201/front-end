@@ -90,10 +90,13 @@
 
 
                                                             <table class="table table-striped table-bordered col-lg-10 ">
+                                                                <caption>
+                                                                    <!-- <i>Add/remove textbox and chip dynamically in Angular 6</i> -->
+                                                                </caption>
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Add Unit
-                                                                            <a (click)="onEditCloseUnits(j)" class="text-info float-right">
+                                                                            <a (click)="onEditCloseUnits(i,j)" class="text-info float-right">
                                                                                 <i
                                                                                     class="mdi mdi-{{isEditUnits[j] ? 'close' : 'pencil'}} mdi-18px"></i>
                                                                             </a>
@@ -132,8 +135,7 @@
                                                                         <td align="right">
                                                                             <button *ngIf="unitArray.length <= 6"
                                                                                 class="btn btn-secondary btn-lg1" type="button"
-                                                                                (click)="addUnits(j)" style="margin-right:10px">Add More Sub
-                                                                                Sections</button>
+                                                                                (click)="addUnits(i,j,k)" style="margin-right:10px">Add Units</button>
                                                                             <!-- <button (click)="onEditCloseSubItems(i)" class="btn btn-primary btn-lg1"
                                                                                 type="button">Save Section</button> -->
                                                                         </td>
@@ -161,7 +163,7 @@
                                             <td align="right">
                                                 <button *ngIf="subfieldArray.length <= 6"
                                                     class="btn btn-secondary btn-lg1" type="button"
-                                                    (click)="addSubFieldValue(i)" style="margin-right:10px">Add More Sub
+                                                    (click)="addSubFieldValue(i)" style="margin-right:10px">Add Sub
                                                     Sections</button>
                                                 <!-- <button (click)="onEditCloseSubItems(i)" class="btn btn-primary btn-lg1"
                                                     type="button">Save Section</button> -->
@@ -178,7 +180,7 @@
                 <tr>
                     <td align="right">
                         <button *ngIf="fieldArray.length <= 6" class="btn btn-secondary btn-lg1" type="button"
-                            (click)="addFieldValue()" style="margin-right:10px">Add More Sections</button>
+                            (click)="addFieldValue()" style="margin-right:10px">Add Sections</button>
                         <!-- <button (click)="onEditCloseItems()" class="btn btn-primary btn-lg1" type="button">Save
                             Section</button> -->
                     </td>
