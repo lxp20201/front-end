@@ -182,3 +182,21 @@ export const coursecreation = gql`
     }
   }
 `;
+
+
+export const enrollcourse = gql`
+  mutation enrollcourse(
+      $course_id: String,
+      $creator_id: String,
+      $customer_id: String)
+    {
+        enrollcourse(
+          course_id : $course_id,
+          creator_id : $creator_id,
+          customer_id : $customer_id
+        ){
+          success
+          message
+         }
+    }
+`;

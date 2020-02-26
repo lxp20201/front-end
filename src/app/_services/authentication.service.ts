@@ -11,7 +11,8 @@ import {
   resetpassword,
   confirmpassword,
   checklinkstatus,
-  coursecreation
+  coursecreation,
+  enrollcourse
 } from "../operations/mutation";
 
 import { environment } from "@environments/environment";
@@ -165,4 +166,17 @@ export class AuthenticationService {
       }, 
     });
   }
+
+  enrollcourse(course_id,creator_id,customer_id){
+    return this.Apollo.mutate({
+      mutation: enrollcourse,
+      variables: {
+        course_id : course_id,
+        creator_id : creator_id,
+        customer_id : customer_id
+      },
+    });
+  }
+
+
 }
