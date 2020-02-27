@@ -18,7 +18,7 @@
             <tbody *ngIf="!isEditItems">
                 <tr *ngFor="let field of fieldArray; let i = index">
                     <td *ngIf="field?.name">
-                        <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i> {{field.name}}
+                        <i (click)="deleteFieldValue(field,i)" class="mdi mdi-close mdi-18px"></i> {{field.name}}
                     </td>
                 </tr>
             </tbody>
@@ -28,7 +28,7 @@
                     <td>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <div (click)="deleteFieldValue(i)" class="input-group-text">
+                                <div (click)="deleteFieldValue(field,i)" class="input-group-text">
                                     <i class="mdi mdi-close mdi-18px"></i>
                                 </div>
                             </div>
@@ -54,20 +54,20 @@
                                     </thead>
 
                                     <tbody *ngIf="!isEditItemsSub[i]">
-                                        <tr *ngFor="let subfield of subfieldArray[i]; let j = index">
+                                        <tr *ngFor="let subfield of field['section']; let j = index">
                                             <td *ngIf="subfield?.name">
-                                                <i (click)="deleteSubFieldValue(i,j)" class="mdi mdi-close mdi-18px"></i>
+                                                <i (click)="deleteSubFieldValue(subfield,i,j)" class="mdi mdi-close mdi-18px"></i>
                                                 {{subfield.name}}
                                             </td>
                                         </tr>
                                     </tbody>
 
                                     <tbody *ngIf="isEditItemsSub[i]">
-                                        <tr *ngFor="let subfield of subfieldArray[i]; let j = index">
+                                        <tr *ngFor="let subfield of field['section']; let j = index">
                                             <td>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div (click)="deleteSubFieldValue(i,j)" class="input-group-text">
+                                                        <div (click)="deleteSubFieldValue(subfield,i,j)" class="input-group-text">
                                                             <i class="mdi mdi-close mdi-18px"></i>
                                                         </div>
                                                     </div>
@@ -105,28 +105,28 @@
                                                                 </thead>
                             
                                                                 <tbody *ngIf="!isEditUnits[j]">
-                                                                    <tr *ngFor="let u of unitArray[j]; let k = index">
+                                                                    <tr *ngFor="let u of subfield['subsection']; let k = index">
                                                                         <td *ngIf="u?.name">
-                                                                            <i (click)="deleteUnitValue(i,j,k)" class="mdi mdi-close mdi-18px"></i>
+                                                                            <i (click)="deleteUnitValue(u,i,j,k)" class="mdi mdi-close mdi-18px"></i>
                                                                             {{u.name}}
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
                             
                                                                 <tbody *ngIf="isEditUnits[j]">
-                                                                    <tr *ngFor="let u of unitArray[j]; let k = index">
+                                                                    <tr *ngFor="let u of subfield['subsection']; let k = index">
                                                                         <td>
                                                                             <div class="input-group">
                                                                                 <div class="input-group-prepend">
-                                                                                    <div (click)="deleteSubFieldValue(i,j,k)" class="input-group-text">
+                                                                                    <div (click)="deleteUnitValue(u,i,j,k)" class="input-group-text">
                                                                                         <i class="mdi mdi-close mdi-18px"></i>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="subsections">
                                                                                     <!-- add here -->
-                                                                                    <input [(ngModel)]="u.name" class="form-control" type="text"
+                                                                                    <textarea  rows="8" cols="30" [(ngModel)]="u.name" class="form-control" type="text"
                                                                                         name="{{u.name}}"
-                                                                                        placeholder="Add Units{{k + 1}}.....">
+                                                                                        placeholder="Add Unit {{k + 1}}....."></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -136,7 +136,7 @@
                                                                             <button *ngIf="unitArray.length <= 6"
                                                                                 class="btn btn-secondary btn-lg1" type="button"
                                                                                 (click)="addUnits(i,j,k)" style="margin-right:10px">Add Units</button>
-                                                                            <!-- <button (click)="onEditCloseSubItems(i)" class="btn btn-primary btn-lg1"
+                                                                            <!-- <button (click)="publish()" class="btn btn-primary btn-lg1"
                                                                                 type="button">Save Section</button> -->
                                                                         </td>
                                                                     </tr>
@@ -165,7 +165,7 @@
                                                     class="btn btn-secondary btn-lg1" type="button"
                                                     (click)="addSubFieldValue(i)" style="margin-right:10px">Add Sub
                                                     Sections</button>
-                                                <!-- <button (click)="onEditCloseSubItems(i)" class="btn btn-primary btn-lg1"
+                                                <!-- <button (click)="publishSubSection(i,j)" class="btn btn-primary btn-lg1"
                                                     type="button">Save Section</button> -->
                                             </td>
                                         </tr>
@@ -181,7 +181,7 @@
                     <td align="right">
                         <button *ngIf="fieldArray.length <= 6" class="btn btn-secondary btn-lg1" type="button"
                             (click)="addFieldValue()" style="margin-right:10px">Add Sections</button>
-                        <!-- <button (click)="onEditCloseItems()" class="btn btn-primary btn-lg1" type="button">Save
+                        <!-- <button (click)="publishSections()" class="btn btn-primary btn-lg1" type="button">Save
                             Section</button> -->
                     </td>
                 </tr>
