@@ -117,6 +117,47 @@ export class HomeComponent implements OnInit {
     private loadAllCourses() {
 
     }
+    onClickEnroll() {
+        this.authenticationService
+        .enrollcourse(
+            "5e4d30c64913811384d8b441",
+            "5e4525f32f5ce1428cb0464b",
+            "5e453b251310327d9af482a5"
+          )
+        .subscribe(result => {
+            console.log("result", result)
+        //   if (result.data["resetpassword"].success === true) {
+        //     this.router.navigate(["/home"]);
+        //     Swal.fire(
+        //       "Success!",
+        //       "A mail has been sent to your account",
+        //       "success"
+        //     );
+        //   } else {
+        //     Swal.fire("Failed!", result.data["resetpassword"].message, "error");
+        //   }
+        });
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to view course!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Enroll Now!'
+          }).then((result) => {
+                console.log("result.value", result.value)
+                if (result.value) {
+                Swal.fire(
+                    'Enrolled',
+                    'Your course has been enrolled.',
+                    'success'
+                )
+                }
+          })
+    }
+
     viewAllCourses() {
 
         var userid = localStorage.getItem('user_detail')
